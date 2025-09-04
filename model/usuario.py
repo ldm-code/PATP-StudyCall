@@ -1,10 +1,6 @@
 class Usuario:
-          def __init__(self,nome,email,senha,tipo='aluno'):
+          def __init__(self,nome,email,senha,tipo):
                   self.nome=nome
                   self.email=email
                   self.senha=senha
                   self.tipo=tipo   
-          def atualizar(self,novo_tipo) :
-                  tipos=['aluno','professor']  
-                  if novo_tipo in tipos:
-                          self.tipo=novo_tipo 
