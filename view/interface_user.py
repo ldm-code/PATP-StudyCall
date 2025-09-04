@@ -13,7 +13,7 @@ from PyQt5.QtWidgets import QMessageBox
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))  
-from model.usuario import Usuario
+from controller.usuario_controller import UsuarioController
 class Ui_Form(object):
 
     def setupUi(self, Form):
@@ -117,24 +117,11 @@ class Ui_Form(object):
         email=self.input_email.text()
         senha=self.input_senha.text()
         tipo=self.input_type.text()
-        tipos=['professor','aluno']   
-        if not  nome or not email or not senha or not tipo :
-                   QMessageBox.warning(None, "campo nao preenchido", "Complete todos os campos!")
-                   return  
-        if tipo not in tipos:
-             QMessageBox.warning(None,'Desculpe','o ultimo campo so aceita professor ou aluno.')
-             
-        else:
-          user=Usuario(
-             nome=nome,
-             email=email,
-             senha=senha,
-             tipo=tipo
-          )
-          print(user)
-       
-
-
+        try:
+            User=UsuarioController.criar_user(nome,email,senha,tipo)
+            print(User)
+        except Exception as e:
+            QMessageBox.warning(None,"Erro!",str(e))
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
