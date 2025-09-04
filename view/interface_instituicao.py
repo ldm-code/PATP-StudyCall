@@ -128,7 +128,8 @@ class Ui_Form(object):
             matricula=int(matricula)
         except:
             QMessageBox.warning(None,'ops','matricula tem que ser uma sequencia de numeros')
-        if not nome or not cnpj or not senha or not email or not matricula:
+            return
+        if not nome or not cnpj or not senha or not email:
             QMessageBox.warning(None,'ops','um dos campos nao foi digitado')
         else:
             facul=instituicao(
