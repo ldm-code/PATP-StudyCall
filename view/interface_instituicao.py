@@ -13,7 +13,7 @@ from PyQt5.QtWidgets import QMessageBox
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))  
-from model.instituicao import instituicao
+from controller.instituicao_controle import InstituicaoController
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -124,22 +124,12 @@ class Ui_Form(object):
         senha=self.input_senha.text()
         email=self.input_email.text()
         matricula=self.input_matricula.text()
-        try: 
-            matricula=int(matricula)
-        except:
-            QMessageBox.warning(None,'ops','matricula tem que ser uma sequencia de numeros')
-            return
-        if not nome or not cnpj or not senha or not email:
-            QMessageBox.warning(None,'ops','um dos campos nao foi digitado')
-        else:
-            facul=instituicao(
-                nome=nome,
-                cnpj=cnpj,
-                senha=senha,
-                email=email,
-                matricula=matricula
-            )
-            print(facul)
+        try:
+          facul = InstituicaoController.criar_instituicao(nome, cnpj, senha, email, matricula)
+          print(facul)
+        except Exception as e:
+           QMessageBox.warning(None, "Erro", str(e))
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
