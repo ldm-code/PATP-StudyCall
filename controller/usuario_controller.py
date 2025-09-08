@@ -13,6 +13,5 @@ class UsuarioController:
                   tipos=['professor','aluno']
                   if tipo not in tipos:
                           raise ValueError('esse campo so aceita professor ou aluno.')
-
                   User=Usuario(nome,email,senha,tipo)
                   return User
