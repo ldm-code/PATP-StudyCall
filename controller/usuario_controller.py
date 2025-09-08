@@ -6,12 +6,13 @@ from model.usuario import Usuario
 
 class UsuarioController:
           @staticmethod
-          def criar_user(nome,senha,email,tipo):
+          def criar_user(nome,email,senha,tipo):
                   if not nome.strip() or not senha.strip() or not email.strip() or not tipo.strip():
                           raise ValueError('Um dos campos nao foi preenchido.')
-                  tipos=['professor','aluno','Professor','Aluno']
+                  tipo=tipo.lower()
+                  tipos=['professor','aluno']
                   if tipo not in tipos:
                           raise ValueError('esse campo so aceita professor ou aluno.')
 
-                  User=Usuario(nome,senha,email,tipo)
+                  User=Usuario(nome,email,senha,tipo)
                   return User
