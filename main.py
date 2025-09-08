@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets
+import mysql.connector
 from view.interface_inicial import Ui_Form as UiInicial
 from view.interface_user import Ui_Form as UiUser
 from view.interface_instituicao import Ui_Form as UiInstituicao
