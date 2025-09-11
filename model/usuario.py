@@ -5,3 +5,4 @@ class Usuario:
                   self.email=email
                   self.senha=senha
                   self.tipo=tipo   
+ 
