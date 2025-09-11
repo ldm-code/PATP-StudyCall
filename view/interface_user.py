@@ -120,6 +120,10 @@ class Ui_Form(object):
         try:
             User=UsuarioController.criar_user(nome,email,senha,tipo)
             print(User)
+            self.input_nome.clear()
+            self.input_email.clear()
+            self.input_senha.clear()
+            self.input_type.clear()
         except Exception as e:
             QMessageBox.warning(None,"Erro!",str(e))
 if __name__ == "__main__":
