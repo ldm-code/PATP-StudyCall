@@ -8,7 +8,7 @@ class chamado:
                   self.local=local
                   self.status=status
           def atualizar(self,novo_status,nova_prioridade,novo_tempo):
-                  stats=['resolvido','em aberto']
+                  stats=['resolvido','em aberto','em andamento']
                   self.tempo_estimado=novo_tempo
                   if novo_status in stats:
                       self.status=novo_status

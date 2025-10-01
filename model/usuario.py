@@ -1,5 +1,5 @@
 import mysql.connector
-
+from model.crud_banco import salvar_banco
 class Usuario:
     def __init__(self, nome, email, senha, tipo):
         self.nome = nome
@@ -9,12 +9,7 @@ class Usuario:
     
     def salvar(self):          
         try:
-            conexao = mysql.connector.connect(
-                host="localhost",
-                user="root",
-                password="root",
-                database="patp"
-            )
+            conexao = salvar_banco()
             cursor = conexao.cursor()
             sql = "INSERT INTO usuario (nome, email, senha, tipo) VALUES (%s, %s, %s, %s)"
             valores = (self.nome, self.email, self.senha, self.tipo)

@@ -1,3 +1,5 @@
+import mysql.connector
+from model.crud_banco import salvar_banco
 class instituicao:
           def __init__(self,nome,cnpj,senha,email,matricula):
                   self.nome=nome
@@ -5,3 +7,4 @@ class instituicao:
                   self.senha=senha
                   self.email=email
                   self.matricula=matricula
+          
