@@ -1,9 +1,13 @@
+import _mysql_connector
+
+from model .crud_banco import salvar_banco
+
 class chamado:
           def __init__(self,descricao,titulo,usuario,prioridade,local,instituicao,status='em aberto'):
 
                   self.descricao=descricao
                   self.titulo=titulo
-                  self.usuario=usuario #relacionamento de usuario
+                  self.usuario=usuario 
                   self.prioridade=prioridade
                   self.local=local
                   self.status=status
@@ -15,5 +19,11 @@ class chamado:
                   prioridades=['baixa','média','alta']
                   if nova_prioridade in prioridades:
                           self.prioridade=nova_prioridade
+          def salvar(self):
+                conexao = salvar_banco()
+                cursor = conexao.cursor()
+
+
+ 
                                
                   
