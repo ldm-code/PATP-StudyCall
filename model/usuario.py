@@ -1,4 +1,5 @@
 import mysql.connector
+
 from model.crud_banco import salvar_banco
 class Usuario:
     def __init__(self, nome, email, senha, tipo):

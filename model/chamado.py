@@ -1,28 +1,36 @@
-import _mysql_connector
+import mysql.connector
 
 from model .crud_banco import salvar_banco
 
-class chamado:
-          def __init__(self,descricao,titulo,usuario,prioridade,local,instituicao,status='em aberto'):
-
+class Chamado:
+          def __init__(self,descricao,titulo,prioridade,local,data_abertura,data_fechamento,status='em aberto'):
                   self.descricao=descricao
                   self.titulo=titulo
-                  self.usuario=usuario 
                   self.prioridade=prioridade
                   self.local=local
                   self.status=status
-          def atualizar(self,novo_status,nova_prioridade,novo_tempo):
-                  stats=['resolvido','em aberto','em andamento']
-                  self.tempo_estimado=novo_tempo
-                  if novo_status in stats:
-                      self.status=novo_status
-                  prioridades=['baixa','média','alta']
-                  if nova_prioridade in prioridades:
-                          self.prioridade=nova_prioridade
+                  self.data_abertura=data_abertura
+                  self.data_fechamento=data_fechamento
           def salvar(self):
+            try:
                 conexao = salvar_banco()
                 cursor = conexao.cursor()
 
+                comando = "INSERT INTO chamados(descricao,titulo,prioridade,local,status_chamado,data_abertura,data_fechamento) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+                dados=(self.descricao,self.titulo,self.prioridade,self.local,self.status,self.data_abertura,self.data_fechamento)
+                cursor.execute(comando,dados)
+                conexao.commit()
+                print("roblox achou a calcinha")
+
+            except mysql.connector.Error as erro:
+              print(f" Erro ao salvar usuário: {erro}")
+            finally:
+             if cursor:
+                cursor.close()
+             if conexao:
+                conexao.close()
+
+             
 
  
                                

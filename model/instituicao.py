@@ -1,4 +1,5 @@
 import mysql.connector
+
 from model.crud_banco import salvar_banco #chamando a funcao no codigo
 class Instituicao:
           def __init__(self,nome,senha,matricula,cnpj,email):
