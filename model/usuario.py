@@ -7,7 +7,7 @@ class Usuario:
         self.email = email
         self.senha = senha
         self.tipo = tipo   
-    
+
     def salvar(self):          
         try:
             conexao = salvar_banco()
@@ -17,6 +17,7 @@ class Usuario:
             cursor.execute(sql, valores)
             conexao.commit()
             print("Usuário salvo com sucesso!")
+            return cursor.lastrowid
         except mysql.connector.Error as erro:
             print(f" Erro ao salvar usuário: {erro}")
         finally:
