@@ -5,7 +5,7 @@ from model.chamado import Chamado
 from PyQt5 import QtWidgets
 import sys
 from view.user import Ui_Dialog  
-
+from view.telaInicio import Ui_DialogInit
 def main():
 
     app = QtWidgets.QApplication(sys.argv)
@@ -28,5 +28,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 

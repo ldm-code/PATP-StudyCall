@@ -117,6 +117,7 @@ class Ui_Dialog(object):
         tipo=self.lineTipo.text()
         usuario=Usuario(nome=nome,email=email,senha=senha,tipo=tipo)
         usuario.salvar()
+        QtWidgets.QMessageBox.information(None,"bem vindo","usuario salvo com sucesso!")
 
 if __name__ == "__main__":
     import sys
