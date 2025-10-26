@@ -1,6 +1,6 @@
 import mysql.connector
 
-from model .crud_banco import salvar_banco
+from model .crud_banco import banco
 
 class Adm:
           def __init__(self,nome,senha,instituicao,email,matricula):
@@ -12,7 +12,7 @@ class Adm:
            
           def salvar(self):
            try:
-                 conexao = salvar_banco()
+                 conexao = banco()
                  cursor = conexao.cursor()
 
                  comando = "INSERT INTO adm_usuario(nome,senha,instituicao,matricula,email) VALUES(%s,%s,%s,%s,%s)"

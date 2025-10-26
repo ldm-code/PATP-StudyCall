@@ -1,6 +1,6 @@
 import mysql.connector
 
-from model .crud_banco import salvar_banco
+from model .crud_banco import banco
 
 class Chamado:
           def __init__(self,descricao,titulo,prioridade,local,id_user,data_abertura,data_fechamento,status='em aberto'):
@@ -14,7 +14,7 @@ class Chamado:
                   self.data_fechamento=data_fechamento
           def salvar(self):
             try:
-                conexao = salvar_banco()
+                conexao = banco()
                 cursor = conexao.cursor()
                 print("Tipo de fk_usuario:", type(self.id_user))
                 print("Valor de fk_usuario:", self.id_user)
@@ -22,7 +22,7 @@ class Chamado:
                 dados=(self.descricao,self.titulo,self.prioridade,self.local,self.id_user,self.status,self.data_abertura,self.data_fechamento)
                 cursor.execute(comando,dados)
                 conexao.commit()
-                print("roblox achou a calcinha")
+                print("funcionou")
 
             except mysql.connector.Error as erro:
               print(f" Erro ao salvar : {erro}")
