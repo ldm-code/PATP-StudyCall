@@ -162,7 +162,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 # Banco de dados 
-crud_banco.py  
+model/crud_banco.py  
 *.sql          
 *.db           
 # pytype static type analyzer
