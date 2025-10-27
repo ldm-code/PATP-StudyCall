@@ -101,14 +101,23 @@ class Ui_Dialog(object):
         self.senhaUser.setText(_translate("Dialog", "Senha:"))
         self.tipoUser.setText(_translate("Dialog", "Tipo:"))
     def model(self):
-        nome=self.lineNome.text()
-        email=self.lineEmail.text()
-        senha=self.lineSenha.text()
-        tipo=self.lineTipo.text()
-        usuario=Usuario(nome=nome,email=email,senha=senha,tipo=tipo)
-        usuario.salvar()
-        QtWidgets.QMessageBox.information(None,"bem vindo","usuario salvo com sucesso!")
-
+        nome=self.lineNome.text().strip()
+        email=self.lineEmail.text().strip()
+        senha=self.lineSenha.text().strip()
+        tipo=self.lineTipo.text().strip().lower()
+        tipos=['professor','aluno']
+        if not nome or not email or not senha or not tipo:
+            QtWidgets.QMessageBox.warning(None, "Campos vazios", "Preencha todos os campos antes de salvar!")
+            return 
+        if tipo not in tipos:
+                 QtWidgets.QMessageBox.warning(None, "Tipo inválido", "O tipo deve ser 'professor' ou 'aluno'.")
+                 return
+        try:
+          usuario=Usuario(nome=nome,email=email,senha=senha,tipo=tipo)
+          usuario.salvar()
+          QtWidgets.QMessageBox.information(None,"bem vindo","usuario salvo com sucesso!")
+        except Exception as e:
+            QtWidgets.QMessageBox.critical(None, "Erro ao salvar", f"Ocorreu um erro: {str(e)}")
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

@@ -1,5 +1,5 @@
 import mysql.connector 
-print("Importando crud_banco.py")
+
 
 def banco():
 
