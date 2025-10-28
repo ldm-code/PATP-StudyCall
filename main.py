@@ -13,17 +13,11 @@ class TelaInicio(QtWidgets.QDialog, Ui_DialogInit):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
-
-
         self.btnUser.clicked.connect(self.abrir_tela_usuario)
-
     def abrir_tela_usuario(self):
         self.hide()
-
         self.tela_usuario = TelaUsuario()
         self.tela_usuario.exec_() 
-
-
 class TelaUsuario(QtWidgets.QDialog, Ui_User):
     def __init__(self):
         super().__init__()

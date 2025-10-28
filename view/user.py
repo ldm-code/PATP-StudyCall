@@ -28,18 +28,22 @@ class Ui_Dialog(object):
         self.lineNome.setGeometry(QtCore.QRect(260, 260, 331, 22))
         self.lineNome.setText("")
         self.lineNome.setObjectName("lineNome")
+        self.lineNome.setPlaceholderText('seu nome:')
         self.lineEmail = QtWidgets.QLineEdit(self.frame)
         self.lineEmail.setGeometry(QtCore.QRect(260, 310, 331, 22))
         self.lineEmail.setText("")
         self.lineEmail.setObjectName("lineEmail")
+        self.lineEmail.setPlaceholderText('seu email:(xx@gmail.com):')
         self.lineSenha = QtWidgets.QLineEdit(self.frame)
         self.lineSenha.setGeometry(QtCore.QRect(260, 360, 331, 22))
         self.lineSenha.setText("")
         self.lineSenha.setObjectName("lineSenha")
+        self.lineSenha.setPlaceholderText('sua senha:')
         self.lineTipo = QtWidgets.QLineEdit(self.frame)
         self.lineTipo.setGeometry(QtCore.QRect(260, 410, 331, 22))
         self.lineTipo.setText("")
         self.lineTipo.setObjectName("lineTipo")
+        self.lineTipo.setPlaceholderText('voce e professor ou aluno?')
         self.nomeUser = QtWidgets.QLabel(self.frame)
         self.nomeUser.setGeometry(QtCore.QRect(400, 240, 55, 16))
         font = QtGui.QFont()
@@ -106,7 +110,7 @@ class Ui_Dialog(object):
         senha=self.lineSenha.text().strip()
         tipo=self.lineTipo.text().strip().lower()
         tipos=['professor','aluno']
-        if not nome or not email or not senha or not tipo:
+        if (not nome or not email or not senha )or not tipo:
             QtWidgets.QMessageBox.warning(None, "Campos vazios", "Preencha todos os campos antes de salvar!")
             return 
         if tipo not in tipos:
