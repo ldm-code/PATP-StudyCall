@@ -131,6 +131,7 @@ class Ui_DialogFacul(object):
         self.tipoUser.setText(_translate("Dialog", "Cnpj:"))
         self.tipoUser_2.setText(_translate("Dialog", "Matrícula:"))
     def criar(self):
+        global id_facul
         nome=self.lineNome.text().strip()
         email=self.lineEmail.text().strip()
         senha=self.lineSenha.text().strip()
@@ -147,7 +148,7 @@ class Ui_DialogFacul(object):
             return
         try:
             facul=Instituicao(nome=nome,senha=senha,matricula=matricula,cnpj=cnpj,email=email)
-            facul.salvar()
+            id_facul=facul.salvar()
             QtWidgets.QMessageBox.information(None,"bem vindo","instituicao cadastrada com sucesso!")
         except Exception as e:
             QtWidgets.QMessageBox.critical(None, "Erro ao salvar", f"Ocorreu um erro: {str(e)}")
