@@ -15,7 +15,7 @@ class Adm:
                     conexao = banco()
                     cursor = conexao.cursor()
                     sql = "SELECT id_instituicao FROM instituicao WHERE matricula = %s"
-                    cursor.execute(sql, (self.matricula,))
+                    cursor.execute(sql, (self.matricula))
                     resultado = cursor.fetchone()
                     if resultado:
                       return resultado[0]  
