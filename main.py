@@ -6,7 +6,7 @@ from PyQt5 import QtWidgets
 import sys
 from view.user import Ui_Dialog as Ui_User
 from view.telaInicio import Ui_DialogInit
-
+from view.facul import Ui_DialogFacul as Ui_Facul
 
 class TelaInicio(QtWidgets.QDialog, Ui_DialogInit):
     def __init__(self):
@@ -14,12 +14,22 @@ class TelaInicio(QtWidgets.QDialog, Ui_DialogInit):
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
         self.btnUser.clicked.connect(self.abrir_tela_usuario)
+        self.btnInst.clicked.connect(self.abrir_tela_facul)
     def abrir_tela_usuario(self):
         self.hide()
         self.tela_usuario = TelaUsuario()
         self.tela_usuario.exec_() 
+    def abrir_tela_facul(self):
+        self.hide()
+        self.tela_facul=TelaFacul()
+        self.tela_facul.exec_()
 class TelaUsuario(QtWidgets.QDialog, Ui_User):
     def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.setWindowTitle("StudyCall")
+class TelaFacul(QtWidgets.QDialog,Ui_Facul):
+     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
