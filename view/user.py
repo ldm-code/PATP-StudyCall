@@ -105,6 +105,7 @@ class Ui_Dialog(object):
         self.senhaUser.setText(_translate("Dialog", "Senha:"))
         self.tipoUser.setText(_translate("Dialog", "Tipo:"))
     def model(self):
+        global id_user
         nome=self.lineNome.text().strip()
         email=self.lineEmail.text().strip()
         senha=self.lineSenha.text().strip()
@@ -118,7 +119,7 @@ class Ui_Dialog(object):
                  return
         try:
           usuario=Usuario(nome=nome,email=email,senha=senha,tipo=tipo)
-          usuario.salvar()
+          id_user=usuario.salvar()
           QtWidgets.QMessageBox.information(None,"bem vindo","usuario salvo com sucesso!")
         except Exception as e:
             QtWidgets.QMessageBox.critical(None, "Erro ao salvar", f"Ocorreu um erro: {str(e)}")

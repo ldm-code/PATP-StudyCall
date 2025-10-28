@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
-from view.user import Ui_Dialog as TelaUsuario
+
 
 
 class Ui_DialogInit(object):

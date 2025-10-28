@@ -1,6 +1,6 @@
 import mysql.connector
 
-from model .crud_banco import banco
+from crud_banco import banco
 
 class Adm:
           def __init__(self,nome,senha,instituicao,email,matricula):
@@ -9,13 +9,32 @@ class Adm:
                   self.instituicao=instituicao
                   self.matricula=matricula
                   self.email=email
-           
+          def pegar_id_instituicao(self):
+               try:
+                    conexao=banco()
+                    conexao = banco()
+                    cursor = conexao.cursor()
+                    sql = "SELECT id_instituicao FROM instituicao WHERE matricula = %s"
+                    cursor.execute(sql, (self.matricula,))
+                    resultado = cursor.fetchone()
+                    if resultado:
+                      return resultado[0]  
+                    else:
+                         return None
+               except mysql.connector.Error as e:
+                              print(f"Erro ao buscar ID da instituição: {e}")
+                              return None
+               finally:
+                    if cursor: 
+                         cursor.close()
+                    if conexao: 
+                         conexao.close()
           def salvar(self):
            try:
                  conexao = banco()
                  cursor = conexao.cursor()
 
-                 comando = "INSERT INTO adm_usuario(nome,senha,instituicao,matricula,email) VALUES(%s,%s,%s,%s,%s)"
+                 comando = "INSERT INTO adm(nome,senha,instituicao,matricula,email) VALUES(%s,%s,%s,%s,%s)"
                  dados=(self.nome,self.senha,self.instituicao,self.matricula,self.email)
                  cursor.execute(comando,dados)
                  conexao.commit()
@@ -29,4 +48,3 @@ class Adm:
              if conexao:
                 conexao.close()
 
-             
