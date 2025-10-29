@@ -34,7 +34,6 @@ class Adm:
            try:
                  conexao = banco()
                  cursor = conexao.cursor()
-
                  comando = "INSERT INTO adm(nome,senha,instituicao,matricula,email) VALUES(%s,%s,%s,%s,%s)"
                  dados=(self.nome,self.senha,self.instituicao,self.matricula,self.email)
                  cursor.execute(comando,dados)
