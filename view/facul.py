@@ -12,7 +12,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from model.instituicao import Instituicao
 import re
 
-
 class Ui_DialogFacul(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -148,8 +147,9 @@ class Ui_DialogFacul(object):
             return
         try:
             facul=Instituicao(nome=nome,senha=senha,matricula=matricula,cnpj=cnpj,email=email)
-            id_facul=facul.salvar()
+            facul.salvar()
             QtWidgets.QMessageBox.information(None,"bem vindo","instituicao cadastrada com sucesso!")
+        
         except Exception as e:
             QtWidgets.QMessageBox.critical(None, "Erro ao salvar", f"Ocorreu um erro: {str(e)}")
 # if __name__ == "__main__":

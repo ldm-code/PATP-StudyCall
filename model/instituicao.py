@@ -8,6 +8,7 @@ class Instituicao:
                   self.senha=senha
                   self.email=email
                   self.matricula=matricula
+          
           def salvar(self): # modulo que salva no banco
               try: # try e exept para tratar erros do banco,nada diretamente ligado ao curd
                   conexao=banco() #criando a conexao com a funcao que criamos
@@ -17,7 +18,7 @@ class Instituicao:
                   dados=( self.nome ,self.senha,self.matricula,self.cnpj,self.email) # passando os dados da classe
                   cursor.execute(comando,dados) #executando a querry para enviar dados ao banco
                   conexao.commit()# comando que finaliza a querry
-                  return cursor.lastrowid
+                  
               except mysql.connector.Error as e:#tratamento de erros
                      print(f"erro !,{e}")
               finally:# fechamento do cursor e da conexao
@@ -25,5 +26,3 @@ class Instituicao:
                             cursor.close()
                      if conexao:
                             conexao.close()
-
-                     

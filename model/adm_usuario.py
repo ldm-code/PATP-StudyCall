@@ -1,9 +1,9 @@
 import mysql.connector
 
-from crud_banco import banco
+from model.crud_banco import banco
 
 class Adm:
-          def __init__(self,nome,senha,instituicao,email,matricula):
+          def __init__(self,nome,senha,instituicao,matricula,email):
                   self.nome=nome
                   self.senha=senha
                   self.instituicao=instituicao
@@ -11,15 +11,16 @@ class Adm:
                   self.email=email
           def pegar_id_instituicao(self):
                try:
-                    conexao=banco()
+
                     conexao = banco()
                     cursor = conexao.cursor()
-                    sql = "SELECT id_instituicao FROM instituicao WHERE matricula = %s"
-                    cursor.execute(sql, (self.matricula))
+                    sql = "SELECT id_instituicao FROM instituicao WHERE id_instituicao = %s"
+                    cursor.execute(sql, (self.instituicao,))
                     resultado = cursor.fetchone()
                     if resultado:
                       return resultado[0]  
                     else:
+                         
                          return None
                except mysql.connector.Error as e:
                               print(f"Erro ao buscar ID da instituição: {e}")
@@ -38,7 +39,7 @@ class Adm:
                  dados=(self.nome,self.senha,self.instituicao,self.matricula,self.email)
                  cursor.execute(comando,dados)
                  conexao.commit()
-                 print("moderador tira o mlk desse gp agr!!!!!!!!")
+                 
 
            except mysql.connector.Error as erro:
                 print(f" Erro ao salvar usuário: {erro}")
