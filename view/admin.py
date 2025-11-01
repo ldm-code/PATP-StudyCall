@@ -143,8 +143,21 @@ class Ui_DialogAdm(object):
         admin=Adm(nome=nome,senha=senha,instituicao=instituicao,email=email,matricula=matricula)
         if admin.pegar_id_instituicao() :
           try:
-                    admin.salvar()
-                    QtWidgets.QMessageBox.information(None,"oba","adm salvo com sucesso")
+                    id_adm=admin.salvar()
+                    nome_adm = admin.nome
+                    email_adm = admin.email
+
+
+                    mensagem = f"""
+                    Admin salvo com sucesso!
+                    seu ID: {id_adm}
+                    Nome: {nome_adm}
+                    Email: {email_adm}
+                    *id e necessario para assumir o chamado
+                    """
+
+                    QtWidgets.QMessageBox.information(None, "Confirmação", mensagem)
+
           except:
                     QtWidgets.QMessageBox.warning(None,"erro","id invalido")
         else:

@@ -37,16 +37,25 @@ class TelaUsuario(QtWidgets.QDialog, Ui_User):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
+
 class TelaAdm(QtWidgets.QDialog,Ui_Adm):
      def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
+
 class TelaFacul(QtWidgets.QDialog,Ui_Facul):
      def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
+        self.btnOkFacul.clicked.connect(self.abrir_tela_inicial)
+     def abrir_tela_inicial(self):
+         self.hide()
+         self.tela_inicio=TelaInicio()
+         self.tela_inicio.exec_()
+
+
 def main():
     app = QtWidgets.QApplication(sys.argv)
     janela = TelaInicio()

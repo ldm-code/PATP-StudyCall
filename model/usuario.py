@@ -17,6 +17,7 @@ class Usuario:
             valores = (self.nome, self.email, self.senha, self.tipo)          
             cursor.execute(sql, valores)           
             conexao.commit()
+            return cursor.lastrowid
         except mysql.connector.Error as erro:
             print(f" Erro ao salvar usuário: {erro}")
         finally:

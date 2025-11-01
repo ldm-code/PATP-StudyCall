@@ -147,8 +147,16 @@ class Ui_DialogFacul(object):
             return
         try:
             facul=Instituicao(nome=nome,senha=senha,matricula=matricula,cnpj=cnpj,email=email)
-            facul.salvar()
-            QtWidgets.QMessageBox.information(None,"bem vindo","instituicao cadastrada com sucesso!")
+            id_facul=facul.salvar()
+            nome_facul=facul.nome
+            email_facul=facul.email
+            msg=f"""Instituicao cadastrada com sucesso!
+            seu id:{id_facul}
+            nome: {nome_facul}
+            email: {email_facul}
+            *id necessario para validar acesso de adm
+            """
+            QtWidgets.QMessageBox.information(None,"bem vindo",msg)
         
         except Exception as e:
             QtWidgets.QMessageBox.critical(None, "Erro ao salvar", f"Ocorreu um erro: {str(e)}")

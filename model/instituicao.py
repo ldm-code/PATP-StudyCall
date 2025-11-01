@@ -18,7 +18,7 @@ class Instituicao:
                   dados=( self.nome ,self.senha,self.matricula,self.cnpj,self.email) # passando os dados da classe
                   cursor.execute(comando,dados) #executando a querry para enviar dados ao banco
                   conexao.commit()# comando que finaliza a querry
-                  
+                  return cursor.lastrowid
               except mysql.connector.Error as e:#tratamento de erros
                      print(f"erro !,{e}")
               finally:# fechamento do cursor e da conexao

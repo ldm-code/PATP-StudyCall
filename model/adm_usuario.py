@@ -38,7 +38,7 @@ class Adm:
                  dados=(self.nome,self.senha,self.instituicao,self.matricula,self.email)
                  cursor.execute(comando,dados)
                  conexao.commit()
-                 
+                 return cursor.lastrowid
 
            except mysql.connector.Error as erro:
                 print(f" Erro ao salvar usuário: {erro}")

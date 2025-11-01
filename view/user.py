@@ -119,8 +119,17 @@ class Ui_Dialog(object):
                  return
         try:
           usuario=Usuario(nome=nome,email=email,senha=senha,tipo=tipo)
-          usuario.salvar()
-          QtWidgets.QMessageBox.information(None,"bem vindo","usuario salvo com sucesso!")
+          id_user=usuario.salvar()
+          nome_user=usuario.nome
+          email_user=usuario.email
+          msg=f"""
+          Usuario salvo com sucesso!
+          seu id: {id_user}
+          nome: {nome_user}
+          email: {email_user}
+          * id necessario para criar chamado
+          """
+          QtWidgets.QMessageBox.information(None,"bem vindo",msg)
         except Exception as e:
             QtWidgets.QMessageBox.critical(None, "Erro ao salvar", f"Ocorreu um erro: {str(e)}")
 if __name__ == "__main__":
