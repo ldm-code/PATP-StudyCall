@@ -59,7 +59,7 @@ class ChamadoAssumido(Chamado):
               sql = "SELECT id_chamado FROM chamados WHERE id_chamado  = %s"
               cursor.execute(sql,(id,))
               resultado = cursor.fetchone()
-              print('pegou id chamado')
+             
               if resultado:
                   return resultado[0]
               else:
@@ -81,7 +81,7 @@ class ChamadoAssumido(Chamado):
               sql = "SELECT id_adm FROM adm WHERE id_adm  = %s"
               cursor.execute(sql,(self.id_adm,))
               resultado = cursor.fetchone()
-              print('pegou id adm')
+           
               if resultado:
                   return resultado[0]
               else:
@@ -120,7 +120,6 @@ class ChamadoAssumido(Chamado):
 
             cursor.execute(sql, valores)
             conexao.commit()
-            print(f"Chamado {id} atualizado com sucesso!")
 
           except mysql.connector.Error as e:
             print(f"Erro ao atualizar chamado: {e}")
