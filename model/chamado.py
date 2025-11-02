@@ -50,13 +50,16 @@ class Chamado:
              if conexao:
                 conexao.close()
 class ChamadoAssumido(Chamado):
+         def __init__(self, descricao, titulo, prioridade, local, id_user, data_abertura, data_fechamento, id_adm, status='em aberto'):
+               super().__init__(descricao, titulo, prioridade, local, id_user, data_abertura, data_fechamento, id_adm, status)
          def pegar_id_chamado(self,id):
             try:
               conexao=banco()
               cursor=conexao.cursor()
-              sql = "SELECT id_chamado FROM chamado WHERE id_chamado  = %s"
+              sql = "SELECT id_chamado FROM chamados WHERE id_chamado  = %s"
               cursor.execute(sql,(id,))
               resultado = cursor.fetchone()
+              print('pegou id chamado')
               if resultado:
                   return resultado[0]
               else:
@@ -78,6 +81,7 @@ class ChamadoAssumido(Chamado):
               sql = "SELECT id_adm FROM adm WHERE id_adm  = %s"
               cursor.execute(sql,(self.id_adm,))
               resultado = cursor.fetchone()
+              print('pegou id adm')
               if resultado:
                   return resultado[0]
               else:
@@ -90,3 +94,38 @@ class ChamadoAssumido(Chamado):
                          cursor.close()
                     if conexao: 
                          conexao.close()
+         def atualizar_chamado(self, id):
+          try:
+            conexao = banco()
+            cursor = conexao.cursor()
+
+            sql = """
+            UPDATE chamados
+            SET 
+                prioridade = COALESCE(%s, prioridade),
+                data_fechamento = COALESCE(%s, data_fechamento),
+                id_adm = COALESCE(%s, id_adm),
+                status_chamado = COALESCE(%s, status_chamado)
+            WHERE id_chamado = %s
+            """
+
+            valores = (
+                self.prioridade,
+                self.data_fechamento,
+                self.id_adm,
+                self.status,
+                id
+              
+            )
+
+            cursor.execute(sql, valores)
+            conexao.commit()
+            print(f"Chamado {id} atualizado com sucesso!")
+
+          except mysql.connector.Error as e:
+            print(f"Erro ao atualizar chamado: {e}")
+          finally:
+            if cursor:
+                cursor.close()
+            if conexao:
+                conexao.close()
