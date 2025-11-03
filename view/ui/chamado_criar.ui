@@ -32,7 +32,7 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>140</y>
+      <y>260</y>
       <width>521</width>
       <height>22</height>
      </rect>
@@ -119,16 +119,16 @@
    <widget class="QLabel" name="labelD">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>110</y>
-      <width>111</width>
-      <height>16</height>
+      <x>370</x>
+      <y>220</y>
+      <width>101</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Segoe UI Black</family>
-      <pointsize>10</pointsize>
+      <pointsize>11</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -141,15 +141,15 @@
     <property name="geometry">
      <rect>
       <x>340</x>
-      <y>180</y>
-      <width>161</width>
+      <y>300</y>
+      <width>171</width>
       <height>16</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Segoe UI Black</family>
-      <pointsize>10</pointsize>
+      <pointsize>11</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -162,7 +162,7 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>200</y>
+      <y>330</y>
       <width>521</width>
       <height>22</height>
      </rect>
@@ -172,7 +172,7 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>320</y>
+      <y>470</y>
       <width>521</width>
       <height>22</height>
      </rect>
@@ -182,15 +182,15 @@
     <property name="geometry">
      <rect>
       <x>360</x>
-      <y>290</y>
-      <width>161</width>
+      <y>440</y>
+      <width>121</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Segoe UI Black</family>
-      <pointsize>10</pointsize>
+      <pointsize>11</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -202,16 +202,16 @@
    <widget class="QPushButton" name="btnChamado">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>330</x>
       <y>540</y>
-      <width>181</width>
+      <width>161</width>
       <height>41</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Verdana</family>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -225,120 +225,19 @@ border-radius: 15px;
      <string>Criar chamado</string>
     </property>
    </widget>
-   <widget class="QLabel" name="labelD_4">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>350</y>
-      <width>101</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe UI Black</family>
-      <pointsize>10</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Prioridade:</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Prio1">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>390</y>
-      <width>81</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Verdana</family>
-      <pointsize>8</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(250, 255, 147);
-border-radius: 15px;
- border: 2px solid black;</string>
-    </property>
-    <property name="text">
-     <string>Baixa</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="prioMed">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>390</y>
-      <width>81</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Verdana</family>
-      <pointsize>8</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 210, 105);
-border-radius: 15px;
- border: 2px solid black;</string>
-    </property>
-    <property name="text">
-     <string>Média</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="prioAlta">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>390</y>
-      <width>81</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Verdana</family>
-      <pointsize>8</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(49, 255, 26);
-background-color: rgb(255, 120, 30);
-
-border-radius: 15px;
- border: 2px solid black;</string>
-    </property>
-    <property name="text">
-     <string>Alta</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="labelD_5">
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>230</y>
-      <width>261</width>
+      <y>370</y>
+      <width>281</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Segoe UI Black</family>
-      <pointsize>10</pointsize>
+      <pointsize>11</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -351,10 +250,41 @@ border-radius: 15px;
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>260</y>
+      <y>400</y>
       <width>521</width>
       <height>22</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineTitulo">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>200</y>
+      <width>521</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelD_4">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>160</y>
+      <width>261</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Black</family>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Insira um Título ao Chamado:</string>
     </property>
    </widget>
   </widget>
