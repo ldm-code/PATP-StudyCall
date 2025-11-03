@@ -269,10 +269,10 @@ border-radius: 15px;
  border: 2px solid black;</string>
     </property>
     <property name="text">
-     <string>1</string>
+     <string>Baixa</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Prio1_2">
+   <widget class="QPushButton" name="prioMed">
     <property name="geometry">
      <rect>
       <x>370</x>
@@ -295,10 +295,10 @@ border-radius: 15px;
  border: 2px solid black;</string>
     </property>
     <property name="text">
-     <string>2</string>
+     <string>Média</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Prio3">
+   <widget class="QPushButton" name="prioAlta">
     <property name="geometry">
      <rect>
       <x>470</x>
@@ -323,7 +323,7 @@ border-radius: 15px;
  border: 2px solid black;</string>
     </property>
     <property name="text">
-     <string>3</string>
+     <string>Alta</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelD_5">
@@ -347,7 +347,7 @@ border-radius: 15px;
      <string>Data de Abertura do chamado:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineId_2">
+   <widget class="QLineEdit" name="lineData">
     <property name="geometry">
      <rect>
       <x>160</x>
