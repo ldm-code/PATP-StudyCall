@@ -26,18 +26,18 @@ class Ui_DialogCall(object):
         self.verdeUserB.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.verdeUserB.setFrameShadow(QtWidgets.QFrame.Raised)
         self.verdeUserB.setObjectName("verdeUserB")
-        self.btnOkFacul = QtWidgets.QPushButton(self.frame)
-        self.btnOkFacul.setGeometry(QtCore.QRect(300, 140, 161, 71))
+        self.btnCreateCall = QtWidgets.QPushButton(self.frame)
+        self.btnCreateCall.setGeometry(QtCore.QRect(300, 140, 161, 71))
         font = QtGui.QFont()
         font.setFamily("Verdana")
         font.setPointSize(8)
         font.setBold(True)
         font.setWeight(75)
-        self.btnOkFacul.setFont(font)
-        self.btnOkFacul.setStyleSheet("background-color: rgb(35, 173, 4);\n"
+        self.btnCreateCall.setFont(font)
+        self.btnCreateCall.setStyleSheet("background-color: rgb(35, 173, 4);\n"
 "border-radius: 15px;\n"
 " border: 2px solid black;")
-        self.btnOkFacul.setObjectName("btnOkFacul")
+        self.btnCreateCall.setObjectName("btnCreateCall")
         self.tableWidget = QtWidgets.QTableWidget(self.frame)
         self.tableWidget.setGeometry(QtCore.QRect(190, 270, 431, 251))
         self.tableWidget.setObjectName("tableWidget")
@@ -66,36 +66,15 @@ class Ui_DialogCall(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.btnOkFacul.setText(_translate("Dialog", " Adicionar Chamado"))
+        self.btnCreateCall.setText(_translate("Dialog", " Adicionar Chamado"))
         item = self.tableWidget.verticalHeaderItem(0)
         item.setText(_translate("Dialog", "linha 1 "))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("Dialog", "coluna 1"))
-class ChamadoUser(QtWidgets.QDialog):
-    def __init__(self):
-        super().__init__()
-        self.ui = Ui_DialogCall()
-        self.ui.setupUi(self)
 
-        self.mostrar_chamados()
-
-    def mostrar_chamados(self):
-        colunas, resultados = selecionar_chamados()
-
-        self.ui.tableWidget.setRowCount(len(resultados))
-        self.ui.tableWidget.setColumnCount(len(colunas))
-        self.ui.tableWidget.setHorizontalHeaderLabels(colunas)
-
-        for linha_idx, linha_dados in enumerate(resultados):
-            for coluna_idx, valor in enumerate(linha_dados):
-                self.ui.tableWidget.setItem(linha_idx, coluna_idx, QtWidgets.QTableWidgetItem(str(valor)))
-
-        self.ui.tableWidget.resizeColumnsToContents()
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    janela = ChamadoUser() 
-    janela.show()
-    sys.exit(app.exec_())
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     janela = ChamadoUser() 
+#     janela.show()
+#     sys.exit(app.exec_())

@@ -12,7 +12,8 @@ from view.user import Ui_Dialog as Ui_User
 from view.telaInicio import Ui_DialogInit
 from view.facul import Ui_DialogFacul as Ui_Facul
 from view.admin import Ui_DialogAdm as Ui_Adm
-from view.chamado_user import  ChamadoUser 
+from view.chamado_user import Ui_DialogCall
+from view.abrir_chamado import Ui_DialogCreate as Ui_create
 class TelaInicio(QtWidgets.QDialog, Ui_DialogInit):
     def __init__(self):
         super().__init__()
@@ -60,9 +61,41 @@ class TelaFacul(QtWidgets.QDialog,Ui_Facul):
          self.hide()
          self.tela_inicio=TelaInicio()
          self.tela_inicio.exec_()
+class ChamadoUser(QtWidgets.QDialog,Ui_DialogCall):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_DialogCall()
+        self.ui.setupUi(self)
+        self.ui.btnCreateCall.clicked.connect(self.abrir_tela_criar)
+        self.mostrar_chamados()
 
+    def mostrar_chamados(self):
+        colunas, resultados = selecionar_chamados()
 
+        self.ui.tableWidget.setRowCount(len(resultados))
+        self.ui.tableWidget.setColumnCount(len(colunas))
+        self.ui.tableWidget.setHorizontalHeaderLabels(colunas)
 
+        for linha_idx, linha_dados in enumerate(resultados):
+            for coluna_idx, valor in enumerate(linha_dados):
+                self.ui.tableWidget.setItem(linha_idx, coluna_idx, QtWidgets.QTableWidgetItem(str(valor)))
+
+        self.ui.tableWidget.resizeColumnsToContents()
+    def abrir_tela_criar(self):
+        self.hide()
+        self.tela_criar = TelaChamadoCriar()
+        self.tela_criar.exec_()
+
+class TelaChamadoCriar(QtWidgets.QDialog,Ui_create):
+      def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.setWindowTitle("StudyCall")
+        self.btnChamado.clicked.connect(self.voltar_tela)
+      def voltar_tela(self):
+            self.hide()
+            self.tela_crie=ChamadoUser()
+            self.tela_crie.exec_()
 def main():
     app = QtWidgets.QApplication(sys.argv)
     janela = TelaInicio()
