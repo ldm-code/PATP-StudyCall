@@ -128,3 +128,45 @@ class ChamadoAssumido(Chamado):
                 cursor.close()
             if conexao:
                 conexao.close()
+import mysql.connector
+
+def selecionar_chamados():
+    """
+    Retorna os dados dos chamados junto com o nome do usuário.
+    Essa função será chamada pela camada de interface (view).
+    """
+
+    try:
+        # Conecta ao banco de dados
+        conexao = banco()
+        cursor = conexao.cursor()
+
+        # SELECT com JOIN entre chamados e usuários
+        query = """
+            SELECT 
+                c.id_chamado,
+                c.id_adm,
+                c.titulo,
+                c.descricao,
+                c.prioridade,
+                c.status_chamado,
+                c.local,
+                a.nome AS nome_usuario,
+                c.data_abertura,
+                c.data_fechamento
+            FROM chamados c
+            INNER JOIN usuario a ON c.fk_usuario = a.id_usuario;
+        """
+
+        cursor.execute(query)
+        resultados = cursor.fetchall()           # lista de tuplas (cada linha é um chamado)
+        colunas = [desc[0] for desc in cursor.description]  # nomes das colunas
+
+        cursor.close()
+        conexao.close()
+
+        return colunas, resultados
+
+    except mysql.connector.Error as erro:
+        print(f"Erro ao buscar chamados: {erro}")
+        return [], []  # retorna vazio se der erro

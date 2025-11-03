@@ -3,6 +3,7 @@ from model.instituicao import Instituicao
 from model.chamado import Chamado
 import sys
 import os
+from model.chamado import selecionar_chamados
 
 
 from PyQt5 import QtWidgets
@@ -11,7 +12,7 @@ from view.user import Ui_Dialog as Ui_User
 from view.telaInicio import Ui_DialogInit
 from view.facul import Ui_DialogFacul as Ui_Facul
 from view.admin import Ui_DialogAdm as Ui_Adm
-
+from view.chamado_user import  ChamadoUser 
 class TelaInicio(QtWidgets.QDialog, Ui_DialogInit):
     def __init__(self):
         super().__init__()
@@ -37,6 +38,11 @@ class TelaUsuario(QtWidgets.QDialog, Ui_User):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
+        self.btnUserOk.clicked.connect(self.abrir_tela_chamado) 
+    def abrir_tela_chamado(self):
+        self.hide()
+        self.tela_chamado = ChamadoUser() 
+        self.tela_chamado.exec_()
 
 class TelaAdm(QtWidgets.QDialog,Ui_Adm):
      def __init__(self):
@@ -54,6 +60,7 @@ class TelaFacul(QtWidgets.QDialog,Ui_Facul):
          self.hide()
          self.tela_inicio=TelaInicio()
          self.tela_inicio.exec_()
+
 
 
 def main():
