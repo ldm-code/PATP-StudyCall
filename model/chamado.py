@@ -169,4 +169,29 @@ def selecionar_chamados():
 
     except mysql.connector.Error as erro:
         print(f"Erro ao buscar chamados: {erro}")
-        return [], []  # retorna vazio se der erro
+        return [], [] 
+    #codigo abaixo para por na tela criar_chamado que o roblox vai fzr certo
+        # self.prioridade_selecionada = None 
+        # self.Prio1.clicked.connect(lambda: self.selecionar_prioridade("Baixa"))
+        # self.prioMed.clicked.connect(lambda: self.selecionar_prioridade("Média"))
+        # self.prioAlta.clicked.connect(lambda: self.selecionar_prioridade("Alta"))
+
+#  def selecionar_prioridade(self,valor):
+#          self.prioridade_selecionada = valor
+#     def criar(self):
+      
+#         descricao = self.lineDesc.text()
+#         local = self.lineChamado.text()
+#         id_user = self.lineId.text()
+#         data_abertura = self.lineData.text()
+#         prioridade = self.prioridade_selecionada
+#         if not prioridade:
+#             QtWidgets.QMessageBox.warning(None,'opa','selecione uma prioridade inicial')
+#             return
+#         if not descricao or not local or not data_abertura or not id_user:
+#              QtWidgets.QMessageBox.warning(None,'opa','um dos campos nao foi preenchido')
+#              return
+#         if not re.fullmatch(r'\d+', id_user):
+#             QtWidgets.QMessageBox.warning(None,'ops','id de user invalido')
+#             return
+#         call=Chamado(descricao=descricao,titulo=)
