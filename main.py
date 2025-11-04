@@ -14,6 +14,9 @@ from view.facul import Ui_DialogFacul as Ui_Facul
 from view.admin import Ui_DialogAdm as Ui_Adm
 from view.chamado_user import Ui_DialogCall
 from view.abrir_chamado import Ui_DialogCreate as Ui_create
+from view.chamado_adm import Ui_DialogSelect  
+
+
 class TelaInicio(QtWidgets.QDialog, Ui_DialogInit):
     def __init__(self):
         super().__init__()
@@ -50,7 +53,11 @@ class TelaAdm(QtWidgets.QDialog,Ui_Adm):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
-
+        self.admOk.clicked.connect(self.abrir_tela_call)
+     def abrir_tela_call(self):
+         self.hide()
+         self.tela_Call=TelaChamadoAdm()
+         self.tela_Call.exec_()
 class TelaFacul(QtWidgets.QDialog,Ui_Facul):
      def __init__(self):
         super().__init__()
@@ -66,6 +73,8 @@ class ChamadoUser(QtWidgets.QDialog,Ui_DialogCall):
         super().__init__()
         self.ui = Ui_DialogCall()
         self.ui.setupUi(self)
+        self.setWindowTitle("StudyCall - Usuario")
+
         self.ui.btnCreateCall.clicked.connect(self.abrir_tela_criar)
         self.mostrar_chamados()
 
@@ -82,7 +91,7 @@ class ChamadoUser(QtWidgets.QDialog,Ui_DialogCall):
 
         self.ui.tableWidget.resizeColumnsToContents()
     def abrir_tela_criar(self):
-        self.hide()
+
         self.tela_criar = TelaChamadoCriar()
         self.tela_criar.exec_()
 
@@ -91,11 +100,48 @@ class TelaChamadoCriar(QtWidgets.QDialog,Ui_create):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
-        self.btnChamado.clicked.connect(self.voltar_tela)
-      def voltar_tela(self):
-            self.hide()
-            self.tela_crie=ChamadoUser()
-            self.tela_crie.exec_()
+
+
+
+
+class TelaChamadoAdm(QtWidgets.QDialog,Ui_DialogSelect):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_DialogSelect()
+        self.ui.setupUi(self)
+        self.setWindowTitle("StudyCall - Administrador")
+
+
+        self.carregar_chamados()
+
+
+    def carregar_chamados(self):
+     
+        try:
+            colunas, resultados = selecionar_chamados()  
+        except Exception as e:
+            QtWidgets.QMessageBox.critical(self, "Erro", f"Erro ao carregar chamados:\n{e}")
+            return
+
+        tabela = self.ui.banco_adm
+        tabela.setRowCount(len(resultados))
+        tabela.setColumnCount(len(colunas))
+        tabela.setHorizontalHeaderLabels(colunas)
+
+        for i, linha in enumerate(resultados):
+            for j, valor in enumerate(linha):
+                tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(valor)))
+
+        tabela.resizeColumnsToContents()
+
+    def assumir_chamado(self):
+        linha = self.ui.banco_adm.currentRow()
+        if linha < 0:
+            QtWidgets.QMessageBox.warning(self, "Aviso", "Selecione um chamado para assumir.")
+            return
+        id_chamado = self.ui.banco_adm.item(linha, 0).text()
+        QtWidgets.QMessageBox.information(self, "Chamado", f"Chamado {id_chamado} assumido!")
+
 def main():
     app = QtWidgets.QApplication(sys.argv)
     janela = TelaInicio()
