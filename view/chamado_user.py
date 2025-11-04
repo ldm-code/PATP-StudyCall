@@ -80,7 +80,7 @@ class ChamadoUser(QtWidgets.QDialog,Ui_DialogCall):
 
         self.mostrar_chamados()
         self.ui.btnCreateCall.clicked.connect(self.abrir_tela_criar)
-
+    
     def mostrar_chamados(self):
         colunas, resultados = selecionar_chamados()
 
@@ -93,16 +93,27 @@ class ChamadoUser(QtWidgets.QDialog,Ui_DialogCall):
                 self.ui.tableWidget.setItem(linha_idx, coluna_idx, QtWidgets.QTableWidgetItem(str(valor)))
 
         self.ui.tableWidget.resizeColumnsToContents()
+    
     def abrir_tela_criar(self):
-        self.hide
+        self.hide()
         self.tela_criar = TelaChamadoCriar()
         self.tela_criar.exec_()
+         
+
 
 class TelaChamadoCriar(QtWidgets.QDialog,Ui_create):
       def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
+        self.btnChamado.clicked.connect(self.validar_acesso)
+      def validar_acesso(self):
+          if self.criar():
+              self.voltar()
+      def voltar(self):
+        self.hide()
+        self.tela_chamados = ChamadoUser()  
+        self.tela_chamados.show()
 
 
 

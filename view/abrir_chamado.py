@@ -148,14 +148,14 @@ class Ui_DialogCreate(object):
          titulo=self.lineTitulo.text().strip()
          if not re.fullmatch(r'^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$', data_abertura):
              QtWidgets.QMessageBox.warning(None, "Ops", "A data deve estar no seguinte formato; dd/mm/aaaa")
-             return
+             return False
 
          if not descricao or not local or not data_abertura or not id_user or not titulo:
               QtWidgets.QMessageBox.warning(None,'opa','um dos campos nao foi preenchido')
-              return
+              return False
          if not re.fullmatch(r'\d+', id_user):
              QtWidgets.QMessageBox.warning(None,'ops','id de user invalido')
-             return
+             return False
          call=Chamado(descricao=descricao,titulo=titulo,prioridade='media',local=local,id_user=id_user,data_abertura=data_abertura,data_fechamento='',id_adm=None,status='em aberto')
          if call.pegar_id_user():
              msg="""
@@ -165,10 +165,13 @@ class Ui_DialogCreate(object):
              try:
                  call.salvar()
                  QtWidgets.QMessageBox.information(None,'eba',msg)
+                 return True
              except:
                   QtWidgets.QMessageBox.warning(None,"erro","id invalido")
+                  return False
          else:
              QtWidgets.QMessageBox.warning(None,'erro','id invalido')
+             return False
 # if __name__ == "__main__":
 #     import sys
 #     app = QtWidgets.QApplication(sys.argv)
