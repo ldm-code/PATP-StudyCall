@@ -23,7 +23,7 @@ class Ui_Dialog(object):
 "border-radius: 15px;\n"
 " border: 2px solid black;")
         self.btnUserOk.setObjectName("btnUserOk")
-        self.btnUserOk.clicked.connect(self.model)
+       
         self.lineNome = QtWidgets.QLineEdit(self.frame)
         self.lineNome.setGeometry(QtCore.QRect(260, 260, 331, 22))
         self.lineNome.setText("")
@@ -96,6 +96,7 @@ class Ui_Dialog(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
+        self.info_exibida=False
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
@@ -112,13 +113,17 @@ class Ui_Dialog(object):
         tipo=self.lineTipo.text().strip().lower()
         tipos=['professor','aluno']
         if (not nome or not email or not senha )or not tipo:
+
             QtWidgets.QMessageBox.warning(None, "Campos vazios", "Preencha todos os campos antes de salvar!")
-            return 
+            self.info_exibida=True
+            return False
         if tipo not in tipos:
                  QtWidgets.QMessageBox.warning(None, "Tipo inválido", "O tipo deve ser 'professor' ou 'aluno'.")
-                 return
+                 self.info_exibida=True
+                 return False
+        
+        usuario=Usuario(nome=nome,email=email,senha=senha,tipo=tipo)
         try:
-          usuario=Usuario(nome=nome,email=email,senha=senha,tipo=tipo)
           id_user=usuario.salvar()
           nome_user=usuario.nome
           email_user=usuario.email
@@ -130,13 +135,15 @@ class Ui_Dialog(object):
           * id necessario para criar chamado
           """
           QtWidgets.QMessageBox.information(None,"bem vindo",msg)
+          return True
         except Exception as e:
             QtWidgets.QMessageBox.critical(None, "Erro ao salvar", f"Ocorreu um erro: {str(e)}")
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())
+            return False
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     Dialog = QtWidgets.QDialog()
+#     ui = Ui_Dialog()
+#     ui.setupUi(Dialog)
+#     Dialog.show()
+#     sys.exit(app.exec_())

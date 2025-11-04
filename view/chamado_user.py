@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from model.chamado import selecionar_chamados
-
+from view.abrir_chamado import Ui_DialogCreate as Ui_create
 class Ui_DialogCall(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -71,6 +71,40 @@ class Ui_DialogCall(object):
         item.setText(_translate("Dialog", "linha 1 "))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("Dialog", "coluna 1"))
+class ChamadoUser(QtWidgets.QDialog,Ui_DialogCall):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_DialogCall()
+        self.ui.setupUi(self)
+        self.setWindowTitle("StudyCall - Usuario")
+
+        self.mostrar_chamados()
+        self.ui.btnCreateCall.clicked.connect(self.abrir_tela_criar)
+
+    def mostrar_chamados(self):
+        colunas, resultados = selecionar_chamados()
+
+        self.ui.tableWidget.setRowCount(len(resultados))
+        self.ui.tableWidget.setColumnCount(len(colunas))
+        self.ui.tableWidget.setHorizontalHeaderLabels(colunas)
+
+        for linha_idx, linha_dados in enumerate(resultados):
+            for coluna_idx, valor in enumerate(linha_dados):
+                self.ui.tableWidget.setItem(linha_idx, coluna_idx, QtWidgets.QTableWidgetItem(str(valor)))
+
+        self.ui.tableWidget.resizeColumnsToContents()
+    def abrir_tela_criar(self):
+        self.hide
+        self.tela_criar = TelaChamadoCriar()
+        self.tela_criar.exec_()
+
+class TelaChamadoCriar(QtWidgets.QDialog,Ui_create):
+      def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.setWindowTitle("StudyCall")
+
+
 
 # if __name__ == "__main__":
 #     import sys

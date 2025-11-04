@@ -123,7 +123,12 @@ class Ui_DialogCreate(object):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
-        self.btnChamado.clicked.connect(self.criar)
+        
+        self.lineChamado.setPlaceholderText('local onde ocorreu o problema descrito:')
+        self.lineDesc.setPlaceholderText('descreva seu problema:')
+        self.lineId.setPlaceholderText('seu id(um numero):')
+        self.lineData.setPlaceholderText('a data de hoje:')
+        self.lineTitulo.setPlaceholderText('de um titulo para o problema:')
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))

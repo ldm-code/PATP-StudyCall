@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from model.chamado import selecionar_chamados
 
 class Ui_DialogSelect(object):
     def setupUi(self, Dialog):
@@ -63,6 +63,43 @@ class Ui_DialogSelect(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.btnAssumir.setText(_translate("Dialog", "Assumir Chamado"))
+class TelaChamadoAdm(QtWidgets.QDialog,Ui_DialogSelect):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_DialogSelect()
+        self.ui.setupUi(self)
+        self.setWindowTitle("StudyCall - Administrador")
+
+
+        self.carregar_chamados()
+
+
+    def carregar_chamados(self):
+     
+        try:
+            colunas, resultados = selecionar_chamados()  
+        except Exception as e:
+            QtWidgets.QMessageBox.critical(self, "Erro", f"Erro ao carregar chamados:\n{e}")
+            return
+
+        tabela = self.ui.banco_adm
+        tabela.setRowCount(len(resultados))
+        tabela.setColumnCount(len(colunas))
+        tabela.setHorizontalHeaderLabels(colunas)
+
+        for i, linha in enumerate(resultados):
+            for j, valor in enumerate(linha):
+                tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(valor)))
+
+        tabela.resizeColumnsToContents()
+
+    def assumir_chamado(self):
+        linha = self.ui.banco_adm.currentRow()
+        if linha < 0:
+            QtWidgets.QMessageBox.warning(self, "Aviso", "Selecione um chamado para assumir.")
+            return
+        id_chamado = self.ui.banco_adm.item(linha, 0).text()
+        QtWidgets.QMessageBox.information(self, "Chamado", f"Chamado {id_chamado} assumido!")
 
 
 # if __name__ == "__main__":

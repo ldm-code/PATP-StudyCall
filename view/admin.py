@@ -86,6 +86,7 @@ class Ui_DialogAdm(object):
         font.setWeight(75)
         self.matricAdm.setFont(font)
         self.matricAdm.setObjectName("matricAdm")
+        
         self.lineInstituicao = QtWidgets.QLineEdit(self.robloxdecalsinha)
         self.lineInstituicao.setGeometry(QtCore.QRect(330, 280, 131, 22))
         self.lineInstituicao.setObjectName("lineInstituicao")
@@ -110,9 +111,14 @@ class Ui_DialogAdm(object):
         self.verdeBaixo_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.verdeBaixo_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.verdeBaixo_2.setObjectName("verdeBaixo_2")
-        self.admOk.clicked.connect(self.alt)
+        
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.linematricula.setPlaceholderText('sua matricula')
+        self.lineEmail.setPlaceholderText('seu email')
+        self.lineNome.setPlaceholderText('seu nome')
+        self.lineInstituicao.setPlaceholderText('id da sua Instituicao ')
+        self.lineSenha.setPlaceholderText('sua senha:')
         
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -131,13 +137,13 @@ class Ui_DialogAdm(object):
         matricula=self.linematricula.text().strip()
         if not nome or not email or not senha or not instituicao or not matricula:
             QtWidgets.QMessageBox.warning(None, "Campos vazios", "Preencha todos os campos antes de salvar!")
-            return
+            return False
         if not re.fullmatch(r'[\d-]+', matricula ):
             QtWidgets.QMessageBox.warning(None,"ops",'matricula deve ser numero')
-            return
+            return False
         elif not re.fullmatch(r'\d+', instituicao):
              QtWidgets.QMessageBox.warning(None,'erro','aqui voce digita o id da instituicao cadastrada')
-
+             return False
         
        
         admin=Adm(nome=nome,senha=senha,instituicao=instituicao,email=email,matricula=matricula)
@@ -157,11 +163,13 @@ class Ui_DialogAdm(object):
                     """
 
                     QtWidgets.QMessageBox.information(None, "Confirmação", mensagem)
-
+                    return True
           except:
                     QtWidgets.QMessageBox.warning(None,"erro","id invalido")
+                    return False
         else:
              QtWidgets.QMessageBox.warning(None,'erro','esse id nao esta cadastrado')
+             return False
 # if __name__ == "__main__":
 #     import sys
 #     app = QtWidgets.QApplication(sys.argv)

@@ -23,7 +23,7 @@ class Ui_DialogFacul(object):
         self.frame.setObjectName("frame")
         self.btnOkFacul = QtWidgets.QPushButton(self.frame)
         self.btnOkFacul.setGeometry(QtCore.QRect(370, 540, 111, 51))
-        self.btnOkFacul.clicked.connect(self.criar)
+       
         font = QtGui.QFont()
         font.setFamily("Verdana")
         font.setPointSize(8)
@@ -138,13 +138,13 @@ class Ui_DialogFacul(object):
         matricula=self.lineMatricula.text().strip()
         if not nome or not email or not senha or not cnpj or not matricula:
             QtWidgets.QMessageBox.warning(None, "Campos vazios", "Preencha todos os campos antes de salvar!")
-            return 
+            return False
         if not re.fullmatch(r'[\d-]+', matricula ):
             QtWidgets.QMessageBox.warning(None,"ops",'matricula deve ser numero')
-            return
+            return False
         if not re.fullmatch(r'[\d-]+', cnpj ):
             QtWidgets.QMessageBox.warning(None,"ops",'cnpj deve ser numero')
-            return
+            return False
         try:
             facul=Instituicao(nome=nome,senha=senha,matricula=matricula,cnpj=cnpj,email=email)
             id_facul=facul.salvar()
@@ -157,9 +157,11 @@ class Ui_DialogFacul(object):
             *id necessario para validar acesso de adm
             """
             QtWidgets.QMessageBox.information(None,"bem vindo",msg)
+            return True
         
         except Exception as e:
             QtWidgets.QMessageBox.critical(None, "Erro ao salvar", f"Ocorreu um erro: {str(e)}")
+            return False
 # if __name__ == "__main__":
 #     import sys
 #     app = QtWidgets.QApplication(sys.argv)
