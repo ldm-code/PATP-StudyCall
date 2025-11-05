@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from model.chamado import selecionar_chamados
-
+from view.assumir_chamado import Ui_DialogAssumir as Ui_assumir
 class Ui_DialogSelect(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -72,7 +72,7 @@ class TelaChamadoAdm(QtWidgets.QDialog,Ui_DialogSelect):
 
 
         self.carregar_chamados()
-
+        self.ui.btnAssumir.clicked.connect(self.abrir_tela_nova)
 
     def carregar_chamados(self):
      
@@ -92,15 +92,27 @@ class TelaChamadoAdm(QtWidgets.QDialog,Ui_DialogSelect):
                 tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(valor)))
 
         tabela.resizeColumnsToContents()
+    def abrir_tela_nova(self):
+        self.hide()
+        self.tela_assumir=TelaAssumir()
+        self.tela_assumir.exec_()
+class TelaAssumir(QtWidgets.QDialog,Ui_assumir):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.setWindowTitle("StudyCall")
+        self.btnAssumeChamado.clicked.connect(self.validar_acesso)
+    def validar_acesso(self):
+          if self.assumir():
+              self.voltar()
+    def voltar(self):
+        self.hide()
+        self.tela_chamados = TelaChamadoAdm()  
+        self.tela_chamados.show()
 
-    def assumir_chamado(self):
-        linha = self.ui.banco_adm.currentRow()
-        if linha < 0:
-            QtWidgets.QMessageBox.warning(self, "Aviso", "Selecione um chamado para assumir.")
-            return
-        id_chamado = self.ui.banco_adm.item(linha, 0).text()
-        QtWidgets.QMessageBox.information(self, "Chamado", f"Chamado {id_chamado} assumido!")
+    
 
+   
 
 # if __name__ == "__main__":
 #     import sys

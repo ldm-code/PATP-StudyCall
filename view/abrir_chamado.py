@@ -160,7 +160,7 @@ class Ui_DialogCreate(object):
          if call.pegar_id_user():
              msg="""
                   Chamado criado com sucesso!
-                  * clique no x no canto superior para continuar 
+                 
                  """
              try:
                  call.salvar()

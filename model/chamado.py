@@ -128,7 +128,7 @@ class ChamadoAssumido(Chamado):
                 cursor.close()
             if conexao:
                 conexao.close()
-import mysql.connector
+
 
 def selecionar_chamados():
     """
