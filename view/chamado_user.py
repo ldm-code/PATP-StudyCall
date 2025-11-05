@@ -10,7 +10,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from model.chamado import selecionar_chamados
+from model.usuario import selecionar_ultimo_id
 from view.abrir_chamado import Ui_DialogCreate as Ui_create
+
 class Ui_DialogCall(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -62,6 +64,16 @@ class Ui_DialogCall(object):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        
+        self.tableUltimoID = QtWidgets.QTableWidget(self.frame)
+        self.tableUltimoID.setGeometry(QtCore.QRect(540, 100, 150, 60)) 
+        self.tableUltimoID.setRowCount(1)
+        self.tableUltimoID.setColumnCount(1)
+        self.tableUltimoID.setHorizontalHeaderLabels(["seu ID:"])
+        self.tableUltimoID.setStyleSheet("background-color: #f0f0f0; font: bold 10pt 'Verdana';")
+        self.tableUltimoID.horizontalHeader().setStretchLastSection(True)
+        self.tableUltimoID.verticalHeader().setVisible(False)
+        self.tableUltimoID.horizontalHeader().setFixedHeight(25)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -71,6 +83,8 @@ class Ui_DialogCall(object):
         item.setText(_translate("Dialog", "linha 1 "))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("Dialog", "coluna 1"))
+        
+
 class ChamadoUser(QtWidgets.QDialog,Ui_DialogCall):
     def __init__(self):
         super().__init__()
@@ -79,6 +93,7 @@ class ChamadoUser(QtWidgets.QDialog,Ui_DialogCall):
         self.setWindowTitle("StudyCall - Usuario")
 
         self.mostrar_chamados()
+        self.mostrar_ultimo_id()
         self.ui.btnCreateCall.clicked.connect(self.abrir_tela_criar)
     
     def mostrar_chamados(self):
@@ -93,6 +108,14 @@ class ChamadoUser(QtWidgets.QDialog,Ui_DialogCall):
                 self.ui.tableWidget.setItem(linha_idx, coluna_idx, QtWidgets.QTableWidgetItem(str(valor)))
 
         self.ui.tableWidget.resizeColumnsToContents()
+    def mostrar_ultimo_id(self):
+     ultimo_id = selecionar_ultimo_id()
+
+     if ultimo_id is not None:
+        self.ui.tableUltimoID.setItem(0, 0, QtWidgets.QTableWidgetItem(str(ultimo_id)))
+     else:
+        self.ui.tableUltimoID.setItem(0, 0, QtWidgets.QTableWidgetItem("Nenhum"))
+
     
     def abrir_tela_criar(self):
         self.hide()

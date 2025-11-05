@@ -10,7 +10,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from model.chamado import selecionar_chamados
+from model.adm_usuario import selecionar_ultimo_id_adm
 from view.assumir_chamado import Ui_DialogAssumir as Ui_assumir
+
 class Ui_DialogSelect(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -56,6 +58,16 @@ class Ui_DialogSelect(object):
         self.banco_adm.setColumnCount(0)
         self.banco_adm.setRowCount(0)
 
+        self.tableUltimoID = QtWidgets.QTableWidget(self.frame)
+        self.tableUltimoID.setGeometry(QtCore.QRect(540, 100, 150, 60)) 
+        self.tableUltimoID.setRowCount(1)
+        self.tableUltimoID.setColumnCount(1)
+        self.tableUltimoID.setHorizontalHeaderLabels(["seu ID:"])
+        self.tableUltimoID.setStyleSheet("background-color: #f0f0f0; font: bold 10pt 'Verdana';")
+        self.tableUltimoID.horizontalHeader().setStretchLastSection(True)
+        self.tableUltimoID.verticalHeader().setVisible(False)
+        self.tableUltimoID.horizontalHeader().setFixedHeight(25)
+
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
@@ -72,6 +84,7 @@ class TelaChamadoAdm(QtWidgets.QDialog,Ui_DialogSelect):
 
 
         self.carregar_chamados()
+        self.mostrar_id_adm()
         self.ui.btnAssumir.clicked.connect(self.abrir_tela_nova)
 
     def carregar_chamados(self):
@@ -92,6 +105,15 @@ class TelaChamadoAdm(QtWidgets.QDialog,Ui_DialogSelect):
                 tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(valor)))
 
         tabela.resizeColumnsToContents()
+    def mostrar_id_adm(self):
+         
+     ultimo_id = selecionar_ultimo_id_adm()
+
+     if ultimo_id is not None:
+        self.ui.tableUltimoID.setItem(0, 0, QtWidgets.QTableWidgetItem(str(ultimo_id)))
+     else:
+        self.ui.tableUltimoID.setItem(0, 0, QtWidgets.QTableWidgetItem("Nenhum"))
+
     def abrir_tela_nova(self):
         self.hide()
         self.tela_assumir=TelaAssumir()
