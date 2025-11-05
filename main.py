@@ -47,6 +47,7 @@ class TelaUsuario(QtWidgets.QDialog, Ui_User):
         if self.model():
             self.abrir_tela_chamado()
     def abrir_tela_chamado(self):
+    
         self.hide()
         self.tela_chamado = ChamadoUserView() 
         self.tela_chamado.exec_()
