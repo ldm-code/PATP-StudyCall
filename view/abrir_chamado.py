@@ -11,6 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from model.chamado import Chamado
 import re
+from datetime import datetime
 
 class Ui_DialogCreate(object):
     def setupUi(self, Dialog):
@@ -73,10 +74,10 @@ class Ui_DialogCreate(object):
         self.lineChamado.setGeometry(QtCore.QRect(160, 330, 521, 22))
         self.lineChamado.setObjectName("lineChamado")
         self.lineId = QtWidgets.QLineEdit(self.frame)
-        self.lineId.setGeometry(QtCore.QRect(160, 470, 521, 22))
+        self.lineId.setGeometry(QtCore.QRect(160,390, 521, 22))
         self.lineId.setObjectName("lineId")
         self.labelD_3 = QtWidgets.QLabel(self.frame)
-        self.labelD_3.setGeometry(QtCore.QRect(360, 440, 121, 20))
+        self.labelD_3.setGeometry(QtCore.QRect(360, 360, 121, 20))
         font = QtGui.QFont()
         font.setFamily("Segoe UI Black")
         font.setPointSize(11)
@@ -85,7 +86,7 @@ class Ui_DialogCreate(object):
         self.labelD_3.setFont(font)
         self.labelD_3.setObjectName("labelD_3")
         self.btnChamado = QtWidgets.QPushButton(self.frame)
-        self.btnChamado.setGeometry(QtCore.QRect(330, 540, 161, 41))
+        self.btnChamado.setGeometry(QtCore.QRect(330, 440, 161, 41))
         font = QtGui.QFont()
         font.setFamily("Verdana")
         font.setPointSize(9)
@@ -96,18 +97,8 @@ class Ui_DialogCreate(object):
 "border-radius: 15px;\n"
 " border: 2px solid black;")
         self.btnChamado.setObjectName("btnChamado")
-        self.labelD_5 = QtWidgets.QLabel(self.frame)
-        self.labelD_5.setGeometry(QtCore.QRect(290, 370, 281, 20))
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI Black")
-        font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.labelD_5.setFont(font)
-        self.labelD_5.setObjectName("labelD_5")
-        self.lineData = QtWidgets.QLineEdit(self.frame)
-        self.lineData.setGeometry(QtCore.QRect(160, 400, 521, 22))
-        self.lineData.setObjectName("lineData")
+      
+     
         self.lineTitulo = QtWidgets.QLineEdit(self.frame)
         self.lineTitulo.setGeometry(QtCore.QRect(160, 200, 521, 22))
         self.lineTitulo.setObjectName("lineTitulo")
@@ -127,7 +118,7 @@ class Ui_DialogCreate(object):
         self.lineChamado.setPlaceholderText('local onde ocorreu o problema descrito:')
         self.lineDesc.setPlaceholderText('descreva seu problema:')
         self.lineId.setPlaceholderText('seu id(um numero):')
-        self.lineData.setPlaceholderText('a data de hoje:')
+     
         self.lineTitulo.setPlaceholderText('de um titulo para o problema:')
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -137,14 +128,14 @@ class Ui_DialogCreate(object):
         self.labelD_2.setText(_translate("Dialog", "Local do chamado:"))
         self.labelD_3.setText(_translate("Dialog", "insira seu Id:"))
         self.btnChamado.setText(_translate("Dialog", "Criar chamado"))
-        self.labelD_5.setText(_translate("Dialog", "Data de Abertura do chamado:"))
+       
         self.labelD_4.setText(_translate("Dialog", "Insira um Título ao Chamado:"))
     def criar(self):
       
          descricao = self.lineDesc.text().strip()
          local = self.lineChamado.text().strip()
          id_user = self.lineId.text().strip()
-         data_abertura = self.lineData.text().strip()
+         data_abertura = datetime.now().strftime("%d/%m/%Y")
          titulo=self.lineTitulo.text().strip()
          if not re.fullmatch(r'^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$', data_abertura):
              QtWidgets.QMessageBox.warning(None, "Ops", "A data deve estar no seguinte formato; dd/mm/aaaa")

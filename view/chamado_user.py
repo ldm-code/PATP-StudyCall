@@ -98,14 +98,17 @@ class ChamadoUser(QtWidgets.QDialog,Ui_DialogCall):
     
     def mostrar_chamados(self):
         colunas, resultados = selecionar_chamados()
-
+        nomes=['id do chamado','id do admin','titulo','descricao','nivel de prioridade','status','local onde ocorreu','usuario','data de abertura','data de fechamento']
         self.ui.tableWidget.setRowCount(len(resultados))
         self.ui.tableWidget.setColumnCount(len(colunas))
-        self.ui.tableWidget.setHorizontalHeaderLabels(colunas)
+        self.ui.tableWidget.setHorizontalHeaderLabels(nomes)
 
         for linha_idx, linha_dados in enumerate(resultados):
             for coluna_idx, valor in enumerate(linha_dados):
-                self.ui.tableWidget.setItem(linha_idx, coluna_idx, QtWidgets.QTableWidgetItem(str(valor)))
+                 texto = "" if valor is None else str(valor) 
+                 item = QtWidgets.QTableWidgetItem(texto)
+                 item.setTextAlignment(QtCore.Qt.AlignCenter)  
+                 self.ui.tableWidget.setItem(linha_idx, coluna_idx, item)
 
         self.ui.tableWidget.resizeColumnsToContents()
     def mostrar_ultimo_id(self):

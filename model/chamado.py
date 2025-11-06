@@ -131,17 +131,13 @@ class ChamadoAssumido(Chamado):
 
 
 def selecionar_chamados():
-    """
-    Retorna os dados dos chamados junto com o nome do usuário.
-    Essa função será chamada pela camada de interface (view).
-    """
+   
 
     try:
-        # Conecta ao banco de dados
+       
         conexao = banco()
         cursor = conexao.cursor()
 
-        # SELECT com JOIN entre chamados e usuários
         query = """
             SELECT 
                 c.id_chamado,
@@ -159,8 +155,8 @@ def selecionar_chamados():
         """
 
         cursor.execute(query)
-        resultados = cursor.fetchall()           # lista de tuplas (cada linha é um chamado)
-        colunas = [desc[0] for desc in cursor.description]  # nomes das colunas
+        resultados = cursor.fetchall()           
+        colunas = [desc[0] for desc in cursor.description]  
 
         cursor.close()
         conexao.close()
