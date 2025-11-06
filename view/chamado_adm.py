@@ -93,8 +93,9 @@ class TelaChamadoAdm(QtWidgets.QDialog,Ui_DialogSelect):
             colunas, resultados = selecionar_chamados()  
         except Exception as e:
             QtWidgets.QMessageBox.critical(self, "Erro", f"Erro ao carregar chamados:\n{e}")
-            return
-        nomes=['id do chamado','id do admin','titulo','descricao','nivel de prioridade','status','local onde ocorreu','usuario','data de abertura','sera/foi finalizado dia']
+            return False
+        nomes=['id do chamado','id do admin','titulo','descricao','nivel de prioridade','status','local onde ocorreu','usuario','data de abertura','Finalização: prevista ou em']
+        self.ui.tableWidget.setRowCount(len(resultados))
         tabela = self.ui.banco_adm
         tabela.setRowCount(len(resultados))
         tabela.setColumnCount(len(colunas))
