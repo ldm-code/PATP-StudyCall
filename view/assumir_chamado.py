@@ -21,9 +21,18 @@ class Ui_DialogAssumir(object):
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
-        self.lineDesc = QtWidgets.QLineEdit(self.frame)
-        self.lineDesc.setGeometry(QtCore.QRect(160, 220, 521, 22))
-        self.lineDesc.setObjectName("lineDesc")
+        self.rbAberto = QtWidgets.QRadioButton("Em Aberto", self.frame)
+        self.rbAberto.setGeometry(QtCore.QRect(160, 220, 150, 30))
+        self.rbAberto.setStyleSheet("background-color: rgb(255, 118, 21); border-radius: 10px;")
+        self.rbAberto.setObjectName("rbAberto")
+        self.rbAndamento = QtWidgets.QRadioButton("Em Andamento", self.frame)
+        self.rbAndamento.setGeometry(QtCore.QRect(320, 220, 150, 30))
+        self.rbAndamento.setStyleSheet("background-color: rgb(255, 209, 69); border-radius: 10px;")
+        self.rbAndamento.setObjectName("rbAndamento")
+        self.rbResolvido = QtWidgets.QRadioButton("Resolvido", self.frame)
+        self.rbResolvido.setGeometry(QtCore.QRect(480, 220, 150, 30))
+        self.rbResolvido.setStyleSheet("background-color: rgb(188, 255, 137); border-radius: 10px;")
+        self.rbResolvido.setObjectName("rbResolvido")
         self.verdeUserB = QtWidgets.QFrame(self.frame)
         self.verdeUserB.setGeometry(QtCore.QRect(0, -10, 881, 51))
         self.verdeUserB.setStyleSheet("background-color: rgb(25, 170, 0);")
@@ -162,7 +171,7 @@ class Ui_DialogAssumir(object):
         self.btnMedia.clicked.connect(lambda: self.selecionar_prioridade("Média"))
         self.btnMedia_2.clicked.connect(lambda: self.selecionar_prioridade("Alta"))
         self.lineDataFecha.setPlaceholderText('data estimada/real de conclusao')
-        self.lineDesc.setPlaceholderText('(em aberto,em andamento,resolvido)')
+  
         self.lineIdAdm.setPlaceholderText('seu id de admin(um numero)')
         self.lineIdChamado.setPlaceholderText('id do chamado que quer editar(um numero)')
     def selecionar_prioridade(self, valor):
@@ -185,12 +194,18 @@ class Ui_DialogAssumir(object):
         prioridade = self.prioridade_selecionada
         id_adm=self.lineIdAdm.text().strip()
         id_chamado=self.lineIdChamado.text().strip()
-        status=self.lineDesc.text().strip().lower()
         data_fechamento=self.lineDataFecha.text().strip()
-        status_possivel=['em aberto','resolvido','em andamento']
-        if status not in status_possivel:
-            QtWidgets.QMessageBox.warning(None,'ops','os stats sao so em aberto,andamento e concluido')
-            return False
+        
+        if self.rbAberto.isChecked():
+              status = 'em aberto'
+        elif self.rbAndamento.isChecked():
+            status = 'em andamento'
+        elif self.rbResolvido.isChecked():
+             status = 'resolvido'
+        else:
+             QtWidgets.QMessageBox.warning(None,'Ops','Selecione um status')
+             return False
+
         if not re.fullmatch(r'^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$', data_fechamento):
              QtWidgets.QMessageBox.warning(None, "Ops", "A data deve estar no seguinte formato; dd/mm/aaaa")
              return False

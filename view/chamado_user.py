@@ -98,7 +98,7 @@ class ChamadoUser(QtWidgets.QDialog,Ui_DialogCall):
     
     def mostrar_chamados(self):
         colunas, resultados = selecionar_chamados()
-        nomes=['id do chamado','id do admin','titulo','descricao','nivel de prioridade','status','local onde ocorreu','usuario','data de abertura','data de fechamento']
+        nomes=['id do chamado','id do admin','titulo','descricao','nivel de prioridade','status','local onde ocorreu','usuario','data de abertura','Finalização: prevista ou em']
         self.ui.tableWidget.setRowCount(len(resultados))
         self.ui.tableWidget.setColumnCount(len(colunas))
         self.ui.tableWidget.setHorizontalHeaderLabels(nomes)

@@ -39,11 +39,14 @@ class Ui_Dialog(object):
         self.lineSenha.setText("")
         self.lineSenha.setObjectName("lineSenha")
         self.lineSenha.setPlaceholderText('sua senha:')
-        self.lineTipo = QtWidgets.QLineEdit(self.frame)
-        self.lineTipo.setGeometry(QtCore.QRect(260, 410, 331, 22))
-        self.lineTipo.setText("")
-        self.lineTipo.setObjectName("lineTipo")
-        self.lineTipo.setPlaceholderText('voce e professor ou aluno?')
+        self.rbProfessor = QtWidgets.QRadioButton("Professor", self.frame)
+        self.rbProfessor.setGeometry(QtCore.QRect(260, 410, 150, 22))  
+        self.rbProfessor.setStyleSheet("background-color: rgb(188, 255, 137); border-radius: 10px;")
+        self.rbProfessor.setObjectName("rbProfessor")
+        self.rbAluno = QtWidgets.QRadioButton("Aluno", self.frame)
+        self.rbAluno.setGeometry(QtCore.QRect(410, 410, 150, 22)) 
+        self.rbAluno.setStyleSheet("background-color: rgb(188, 255, 137); border-radius: 10px;")
+        self.rbAluno.setObjectName("rbAluno")
         self.nomeUser = QtWidgets.QLabel(self.frame)
         self.nomeUser.setGeometry(QtCore.QRect(400, 240, 55, 16))
         font = QtGui.QFont()
@@ -96,7 +99,7 @@ class Ui_Dialog(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-        self.info_exibida=False
+      
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
@@ -110,17 +113,20 @@ class Ui_Dialog(object):
         nome=self.lineNome.text().strip()
         email=self.lineEmail.text().strip()
         senha=self.lineSenha.text().strip()
-        tipo=self.lineTipo.text().strip().lower()
-        tipos=['professor','aluno']
-        if (not nome or not email or not senha )or not tipo:
+        if self.rbProfessor.isChecked():
+             tipo = "professor"
+        elif self.rbAluno.isChecked():
+             tipo = "aluno"
+        else:
+            QtWidgets.QMessageBox.warning(None, "Tipo inválido", "Selecione se você é professor ou aluno.")
+            return False
+     
+        if not nome or not email or not senha :
 
             QtWidgets.QMessageBox.warning(None, "Campos vazios", "Preencha todos os campos antes de salvar!")
-            self.info_exibida=True
+           
             return False
-        if tipo not in tipos:
-                 QtWidgets.QMessageBox.warning(None, "Tipo inválido", "O tipo deve ser 'professor' ou 'aluno'.")
-                 self.info_exibida=True
-                 return False
+    
         
         usuario=Usuario(nome=nome,email=email,senha=senha,tipo=tipo)
         try:
