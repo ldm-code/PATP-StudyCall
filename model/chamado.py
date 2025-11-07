@@ -152,7 +152,7 @@ def selecionar_chamados():
                 c.data_fechamento
             FROM chamados c
             INNER JOIN usuario a ON c.fk_usuario = a.id_usuario
-            LEFT JOIN adm ON c.id_adm = adm.id_adm;;
+            LEFT JOIN adm ON c.id_adm = adm.id_adm;
         """
 
         cursor.execute(query)
