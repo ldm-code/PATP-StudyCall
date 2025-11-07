@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QButtonGroup
 from model.chamado import ChamadoAssumido
 import re 
 
@@ -127,49 +128,41 @@ class Ui_DialogAssumir(object):
         font.setWeight(75)
         self.labelD_6.setFont(font)
         self.labelD_6.setObjectName("labelD_6")
-        self.btnBaixa = QtWidgets.QPushButton(self.frame)
-        self.btnBaixa.setGeometry(QtCore.QRect(250, 130, 71, 41))
-        font = QtGui.QFont()
-        font.setFamily("Verdana")
-        font.setPointSize(9)
-        font.setBold(True)
-        font.setWeight(75)
-        self.btnBaixa.setFont(font)
-        self.btnBaixa.setStyleSheet("background-color: rgb(188, 255, 137);\n"
-"border-radius: 15px;\n"
-" border: 2px solid black;")
-        self.btnBaixa.setObjectName("btnBaixa")
-        self.btnMedia = QtWidgets.QPushButton(self.frame)
-        self.btnMedia.setGeometry(QtCore.QRect(380, 130, 71, 41))
-        font = QtGui.QFont()
-        font.setFamily("Verdana")
-        font.setPointSize(9)
-        font.setBold(True)
-        font.setWeight(75)
-        self.btnMedia.setFont(font)
-        self.btnMedia.setStyleSheet("background-color: rgb(255, 209, 69);\n"
-"border-radius: 15px;\n"
-" border: 2px solid black;")
-        self.btnMedia.setObjectName("btnMedia")
-        self.btnMedia_2 = QtWidgets.QPushButton(self.frame)
-        self.btnMedia_2.setGeometry(QtCore.QRect(510, 130, 71, 41))
-        font = QtGui.QFont()
-        font.setFamily("Verdana")
-        font.setPointSize(9)
-        font.setBold(True)
-        font.setWeight(75)
-        self.btnMedia_2.setFont(font)
-        self.btnMedia_2.setStyleSheet("background-color: rgb(255, 118, 21);\n"
-"border-radius: 15px;\n"
-" border: 2px solid black;")
-        self.btnMedia_2.setObjectName("btnMedia_2")
+    
+      
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         self.prioridade_selecionada=None
-        self.btnBaixa.clicked.connect(lambda: self.selecionar_prioridade("Baixa"))
-        self.btnMedia.clicked.connect(lambda: self.selecionar_prioridade("Média"))
-        self.btnMedia_2.clicked.connect(lambda: self.selecionar_prioridade("Alta"))
+     
+        self.rbBaixa = QtWidgets.QRadioButton("Baixa", self.frame)
+        self.rbBaixa.setGeometry(QtCore.QRect(160, 130, 150, 30))
+        self.rbBaixa.setStyleSheet("background-color: rgb(188, 255, 137); border-radius: 10px; ")
+        self.rbBaixa.setObjectName("rbBaixa")
+
+        self.rbMedia = QtWidgets.QRadioButton("Média", self.frame)
+        self.rbMedia.setGeometry(QtCore.QRect(320, 130, 150, 30))
+        self.rbMedia.setStyleSheet("background-color: rgb(255, 209, 69); border-radius: 10px; ")
+        self.rbMedia.setObjectName("rbMedia")
+
+        self.rbAlta = QtWidgets.QRadioButton("Alta", self.frame)
+        self.rbAlta.setGeometry(QtCore.QRect(480, 130,150, 30))
+        self.rbAlta.setStyleSheet("background-color: rgb(255, 118, 21); border-radius: 10px; ")
+        self.rbAlta.setObjectName("rbAlta")
+
+        self.status_group = QButtonGroup()
+        self.status_group.addButton(self.rbAberto)
+        self.status_group.addButton(self.rbAndamento)
+        self.status_group.addButton(self.rbResolvido)
+        self.prioridade_group = QButtonGroup()
+        self.prioridade_group.addButton(self.rbBaixa)
+        self.prioridade_group.addButton(self.rbMedia)
+        self.prioridade_group.addButton(self.rbAlta)
+
+        self.rbBaixa.toggled.connect(lambda: self.selecionar_prioridade("Baixa") if self.rbBaixa.isChecked() else None)
+        self.rbMedia.toggled.connect(lambda: self.selecionar_prioridade("Média") if self.rbMedia.isChecked() else None)
+        self.rbAlta.toggled.connect(lambda: self.selecionar_prioridade("Alta") if self.rbAlta.isChecked() else None)
+
         self.lineDataFecha.setPlaceholderText('data estimada/real de conclusao')
   
         self.lineIdAdm.setPlaceholderText('seu id de admin(um numero)')
@@ -187,9 +180,7 @@ class Ui_DialogAssumir(object):
         self.labelD_5.setText(_translate("Dialog", "Data de Fechamento do chamado:"))
         self.labelD_4.setText(_translate("Dialog", "Prioridade do Chamado:"))
         self.labelD_6.setText(_translate("Dialog", "Insira seu Id:"))
-        self.btnBaixa.setText(_translate("Dialog", "Baixa"))
-        self.btnMedia.setText(_translate("Dialog", "Média"))
-        self.btnMedia_2.setText(_translate("Dialog", "Alta"))
+
     def assumir(self):
         prioridade = self.prioridade_selecionada
         id_adm=self.lineIdAdm.text().strip()
