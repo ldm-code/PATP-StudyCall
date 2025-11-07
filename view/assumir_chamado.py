@@ -73,18 +73,8 @@ class Ui_DialogAssumir(object):
         self.lineIdAdm = QtWidgets.QLineEdit(self.frame)
         self.lineIdAdm.setGeometry(QtCore.QRect(160, 370, 521, 22))
         self.lineIdAdm.setObjectName("lineIdAdm")
-        self.lineIdChamado = QtWidgets.QLineEdit(self.frame)
-        self.lineIdChamado.setGeometry(QtCore.QRect(160, 450, 521, 22))
-        self.lineIdChamado.setObjectName("lineIdChamado")
-        self.labelD_3 = QtWidgets.QLabel(self.frame)
-        self.labelD_3.setGeometry(QtCore.QRect(360, 410, 141, 20))
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI Black")
-        font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.labelD_3.setFont(font)
-        self.labelD_3.setObjectName("labelD_3")
+   
+      
         self.btnAssumeChamado = QtWidgets.QPushButton(self.frame)
         self.btnAssumeChamado.setGeometry(QtCore.QRect(340, 540, 161, 41))
         font = QtGui.QFont()
@@ -164,18 +154,19 @@ class Ui_DialogAssumir(object):
         self.rbAlta.toggled.connect(lambda: self.selecionar_prioridade("Alta") if self.rbAlta.isChecked() else None)
 
         self.lineDataFecha.setPlaceholderText('data estimada/real de conclusao')
-  
+        self.id_chamado=None
         self.lineIdAdm.setPlaceholderText('seu id de admin(um numero)')
-        self.lineIdChamado.setPlaceholderText('id do chamado que quer editar(um numero)')
+      
     def selecionar_prioridade(self, valor):
         self.prioridade_selecionada = valor
-
+    def dar_valor_ao_id(self,valor):
+        self.id_chamado=valor
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.label.setText(_translate("Dialog", "Chamado:"))
         self.labelD.setText(_translate("Dialog", "Status do Chamado:"))
-        self.labelD_3.setText(_translate("Dialog", "Id do chamado:"))
+        
         self.btnAssumeChamado.setText(_translate("Dialog", "Assumir chamado"))
         self.labelD_5.setText(_translate("Dialog", "Data de Fechamento do chamado:"))
         self.labelD_4.setText(_translate("Dialog", "Prioridade do Chamado:"))
@@ -184,7 +175,7 @@ class Ui_DialogAssumir(object):
     def assumir(self):
         prioridade = self.prioridade_selecionada
         id_adm=self.lineIdAdm.text().strip()
-        id_chamado=self.lineIdChamado.text().strip()
+        id_chamado=self.id_chamado
         data_fechamento=self.lineDataFecha.text().strip()
         
         if self.rbAberto.isChecked():
@@ -202,9 +193,6 @@ class Ui_DialogAssumir(object):
              return False
         if not re.fullmatch(r'\d+',id_adm):
              QtWidgets.QMessageBox.warning(None,'ops','id invalido')
-             return False
-        if not re.fullmatch(r'\d+', id_chamado):
-             QtWidgets.QMessageBox.warning(None,'ops','id  invalido')
              return False
         elif not data_fechamento or not id_adm or not id_chamado:
             QtWidgets.QMessageBox.warning(None,'ops','um dos campos nao foi preenchido')

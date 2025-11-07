@@ -141,7 +141,7 @@ def selecionar_chamados():
         query = """
             SELECT 
                 c.id_chamado,
-                c.id_adm,
+                adm.nome AS nome_adm,
                 c.titulo,
                 c.descricao,
                 c.prioridade,
@@ -151,7 +151,8 @@ def selecionar_chamados():
                 c.data_abertura,
                 c.data_fechamento
             FROM chamados c
-            INNER JOIN usuario a ON c.fk_usuario = a.id_usuario;
+            INNER JOIN usuario a ON c.fk_usuario = a.id_usuario
+            LEFT JOIN adm ON c.id_adm = adm.id_adm;;
         """
 
         cursor.execute(query)
@@ -166,6 +167,3 @@ def selecionar_chamados():
     except mysql.connector.Error as erro:
         print(f"Erro ao buscar chamados: {erro}")
         return [], [] 
- 
-
-

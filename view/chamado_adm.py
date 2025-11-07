@@ -81,12 +81,23 @@ class TelaChamadoAdm(QtWidgets.QDialog,Ui_DialogSelect):
         self.ui = Ui_DialogSelect()
         self.ui.setupUi(self)
         self.setWindowTitle("StudyCall - Administrador")
-
+        self.ui.banco_adm.cellClicked.connect(self.selecionar_chamado)
+        self.id_chamado_selecionado = None  
 
         self.carregar_chamados()
         self.mostrar_id_adm()
         self.ui.btnAssumir.clicked.connect(self.abrir_tela_nova)
-
+    def selecionar_chamado(self, row, column):
+        try:
+            tabela = self.ui.banco_adm
+            item_id = tabela.item(row, 0) 
+            if item_id:
+             self.id_chamado_selecionado = int(item_id.text())
+           
+            else:
+             self.id_chamado_selecionado = None
+        except Exception as e:
+          print(f"Erro ao selecionar chamado: {e}")
     def carregar_chamados(self):
      
         try:
@@ -94,7 +105,7 @@ class TelaChamadoAdm(QtWidgets.QDialog,Ui_DialogSelect):
         except Exception as e:
             QtWidgets.QMessageBox.critical(self, "Erro", f"Erro ao carregar chamados:\n{e}")
             return False
-        nomes=['id do chamado','id do admin','titulo','descricao','nivel de prioridade','status','local onde ocorreu','usuario','data de abertura','Finalização: prevista ou em']
+        nomes=['id do chamado','assumido por','titulo','descricao','nivel de prioridade','status','local onde ocorreu','usuario','data de abertura','Finalização: prevista ou em']
         self.ui.banco_adm.setRowCount(len(resultados))
         tabela = self.ui.banco_adm
         tabela.setRowCount(len(resultados))
@@ -118,10 +129,13 @@ class TelaChamadoAdm(QtWidgets.QDialog,Ui_DialogSelect):
         self.ui.tableUltimoID.setItem(0, 0, QtWidgets.QTableWidgetItem(str(ultimo_id)))
      else:
         self.ui.tableUltimoID.setItem(0, 0, QtWidgets.QTableWidgetItem("Nenhum"))
-
     def abrir_tela_nova(self):
+        if not self.id_chamado_selecionado:
+           QtWidgets.QMessageBox.warning(self, "Atenção", "Selecione um chamado primeiro!")
+           return False        
         self.hide()
         self.tela_assumir=TelaAssumir()
+        self.tela_assumir.dar_valor_ao_id(self.id_chamado_selecionado) 
         self.tela_assumir.exec_()
 class TelaAssumir(QtWidgets.QDialog,Ui_assumir):
     def __init__(self):
