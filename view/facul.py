@@ -115,7 +115,7 @@ class Ui_DialogFacul(object):
         self.lineMatricula.setGeometry(QtCore.QRect(260, 460, 341, 22))
         self.lineMatricula.setText("")
         self.lineMatricula.setObjectName("lineMatricula")
-        self.lineMatricula.setPlaceholderText('matricula do seu adm de chamados')
+        self.lineMatricula.setPlaceholderText('matricula')
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
