@@ -87,7 +87,7 @@ class TelaFacul(QtWidgets.QDialog,Ui_Facul):
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
-    janela = TelaInicio()
+    janela =TelaInicio()
     janela.show()
     sys.exit(app.exec_())
 if __name__ == "__main__":
