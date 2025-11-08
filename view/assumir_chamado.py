@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QButtonGroup
 from model.chamado import ChamadoAssumido
 import re 
+from datetime import datetime
 
 class Ui_DialogAssumir(object):
     def setupUi(self, Dialog):
@@ -186,7 +187,16 @@ class Ui_DialogAssumir(object):
         else:
              QtWidgets.QMessageBox.warning(None,'Ops','Selecione um status')
              return False
-           
+        try:
+             data_fechamento_dt = datetime.strptime(data_fechamento, "%d/%m/%Y").date()
+             hoje = datetime.now().date()
+
+             if data_fechamento_dt < hoje:
+                 QtWidgets.QMessageBox.warning(None, "Ops", "A data de fechamento não pode ser anterior à data de hoje.")
+                 return False
+        except ValueError:
+              QtWidgets.QMessageBox.warning(None, "Ops", "Data inválida.")
+              return False  
         if not re.fullmatch(r'^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$', data_fechamento):
              QtWidgets.QMessageBox.warning(None, "Ops", "A data deve estar no seguinte formato; dd/mm/aaaa")
              return False
