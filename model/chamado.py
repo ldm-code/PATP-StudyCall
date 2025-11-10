@@ -131,8 +131,6 @@ class ChamadoAssumido(Chamado):
 
 
 def selecionar_chamados():
-   
-
     try:
        
         conexao = banco()

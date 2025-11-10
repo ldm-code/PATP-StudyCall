@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from model.chamado import Chamado
+from model.usuario import selecionar_ultimo_id
 import re
 from datetime import datetime
 
@@ -137,6 +138,16 @@ class Ui_DialogCreate(object):
          id_user = self.lineId.text().strip()
          data_abertura = datetime.now().strftime("%d/%m/%Y")
          titulo=self.lineTitulo.text().strip()
+         id_valer=selecionar_ultimo_id()
+         try:
+                 id_user_int = int(id_user)
+         except ValueError:
+                 QtWidgets.QMessageBox.warning(None, "Ops", "ID deve ser um número válido")
+                 return False
+         if id_user_int != id_valer:
+             QtWidgets.QMessageBox.warning(None, "Ops", "esse não e o seu id")
+             return False
+
          if not re.fullmatch(r'^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$', data_abertura):
              QtWidgets.QMessageBox.warning(None, "Ops", "A data deve estar no seguinte formato; dd/mm/aaaa")
              return False
