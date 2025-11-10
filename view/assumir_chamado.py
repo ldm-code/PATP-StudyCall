@@ -11,6 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QButtonGroup
 from model.chamado import ChamadoAssumido
+from model.adm_usuario import selecionar_ultimo_id_adm
 import re 
 from datetime import datetime
 
@@ -178,6 +179,15 @@ class Ui_DialogAssumir(object):
         id_adm=self.lineIdAdm.text().strip()
         id_chamado=self.id_chamado
         data_fechamento=self.lineDataFecha.text().strip()
+        id_valer=selecionar_ultimo_id_adm()
+        try:
+                 id_adm_int = int(id_adm)
+        except ValueError:
+                 QtWidgets.QMessageBox.warning(None, "Ops", "ID deve ser um número válido")
+                 return False
+        if id_adm_int != id_valer:
+             QtWidgets.QMessageBox.warning(None, "Ops", "esse não e o seu id")
+             return False
         if self.rbAberto.isChecked():
               status = 'em aberto'
         elif self.rbAndamento.isChecked():
