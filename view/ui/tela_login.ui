@@ -116,9 +116,9 @@ border-radius: 15px;
    <widget class="QLabel" name="labNome_2">
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>380</x>
       <y>260</y>
-      <width>31</width>
+      <width>51</width>
       <height>31</height>
      </rect>
     </property>
@@ -131,7 +131,7 @@ border-radius: 15px;
      </font>
     </property>
     <property name="text">
-     <string>ID:</string>
+     <string>Senha:</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEmail">
@@ -144,12 +144,12 @@ border-radius: 15px;
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineID">
+   <widget class="QLineEdit" name="lineSenha">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>270</x>
       <y>290</y>
-      <width>281</width>
+      <width>291</width>
       <height>21</height>
      </rect>
     </property>

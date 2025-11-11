@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from model.usuario import Usuario
+from model.usuario import Usuario,selecionar_ultimo_id
 
 
 class Ui_Dialog(object):
@@ -98,8 +98,7 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
-
-      
+    
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
@@ -109,7 +108,7 @@ class Ui_Dialog(object):
         self.senhaUser.setText(_translate("Dialog", "Senha:"))
         self.tipoUser.setText(_translate("Dialog", "Tipo:"))
     def model(self):
-        global id_user
+        
         nome=self.lineNome.text().strip()
         email=self.lineEmail.text().strip()
         senha=self.lineSenha.text().strip()
@@ -130,15 +129,15 @@ class Ui_Dialog(object):
         
         usuario=Usuario(nome=nome,email=email,senha=senha,tipo=tipo)
         try:
-          id_user=usuario.salvar()
-          nome_user=usuario.nome
+          usuario.salvar()
+         
+          nome_user=usuario.senha
           email_user=usuario.email
           msg=f"""
           Usuario salvo com sucesso!
-          seu id: {id_user}
-          nome: {nome_user}
+          senha: {nome_user}
           email: {email_user}
-          * id necessario para criar chamado
+          * email e senha necessario para criar cadastro
           """
           QtWidgets.QMessageBox.information(None,"bem vindo",msg)
           return True

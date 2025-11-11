@@ -15,7 +15,8 @@ from view.admin import Ui_DialogAdm as Ui_Adm
 from view.chamado_user import ChamadoUser as ChamadoUserView
 from view.abrir_chamado import Ui_DialogCreate as Ui_create
 from view.chamado_adm import TelaChamadoAdm as ChamadoAdmView
-
+from view.inicio_log import Ui_DialogInit as Ui_InitLogUser
+from view.tela_login import Ui_DialogUserLog as Ui_userLog
 
 class TelaInicio(QtWidgets.QDialog, Ui_DialogInit):
     def __init__(self):
@@ -27,7 +28,7 @@ class TelaInicio(QtWidgets.QDialog, Ui_DialogInit):
         self.btnInst.clicked.connect(self.abrir_tela_facul)
     def abrir_tela_usuario(self):
         self.hide()
-        self.tela_usuario = TelaUsuario()
+        self.tela_usuario = LogUmUser()
         self.tela_usuario.exec_() 
     def abrir_tela_facul(self):
         self.hide()
@@ -37,11 +38,42 @@ class TelaInicio(QtWidgets.QDialog, Ui_DialogInit):
         self.hide()
         self.tela_adm=TelaAdm()
         self.tela_adm.exec_()
+class LogUmUser(QtWidgets.QDialog,Ui_InitLogUser):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.setWindowTitle("StudyCall")
+        self.btnCadastro.clicked.connect(self.abrir_tela_user)
+        self.btnLogin.clicked.connect(self.abrir_tela_log)
+    def abrir_tela_user(self):
+        self.hide()
+        self.tela_adm=TelaUsuario()
+        self.tela_adm.exec_()
+    def abrir_tela_log(self):
+        self.hide()
+        self.tela_adm=telaLog()
+        self.tela_adm.exec_()
+class telaLog(QtWidgets.QDialog,Ui_userLog):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.setWindowTitle("StudyCall")
+       
+        self.btnLogin.clicked.connect(self.validar_acesso) 
+    def validar_acesso(self):
+        if self.logar():
+            self.abrir_tela_chamado()
+    def abrir_tela_chamado(self):
+    
+        self.hide()
+        self.tela_chamado = ChamadoUserView(self.id_user) 
+        self.tela_chamado.exec_()
 class TelaUsuario(QtWidgets.QDialog, Ui_User):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
+
         self.btnUserOk.clicked.connect(self.validar_acesso) 
     def validar_acesso(self):
         if self.model():
@@ -49,8 +81,8 @@ class TelaUsuario(QtWidgets.QDialog, Ui_User):
     def abrir_tela_chamado(self):
     
         self.hide()
-        self.tela_chamado = ChamadoUserView() 
-        self.tela_chamado.exec_()
+        self.tela_login = LogUmUser() 
+        self.tela_login.exec_()
 class TelaAdm(QtWidgets.QDialog,Ui_Adm):
      def __init__(self):
         super().__init__()

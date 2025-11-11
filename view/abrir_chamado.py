@@ -136,6 +136,7 @@ class Ui_DialogCreate(object):
         self.btnVoltar.setText("Voltar")
         self.btnVoltar.clicked.connect(Dialog.close)
         self.lineTitulo.setPlaceholderText('de um titulo para o problema:')
+        self.id_user=None
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
@@ -153,7 +154,7 @@ class Ui_DialogCreate(object):
          id_user = self.lineId.text().strip()
          data_abertura = datetime.now().strftime("%d/%m/%Y")
          titulo=self.lineTitulo.text().strip()
-         id_valer=selecionar_ultimo_id()
+         id_valer=self.id_user
          try:
                  id_user_int = int(id_user)
          except ValueError:

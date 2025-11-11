@@ -74,6 +74,7 @@ class Ui_DialogCall(object):
         self.tableUltimoID.horizontalHeader().setStretchLastSection(True)
         self.tableUltimoID.verticalHeader().setVisible(False)
         self.tableUltimoID.horizontalHeader().setFixedHeight(25)
+       
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -86,11 +87,12 @@ class Ui_DialogCall(object):
         
 
 class ChamadoUser(QtWidgets.QDialog,Ui_DialogCall):
-    def __init__(self):
+    def __init__(self,id_usuario):
         super().__init__()
         self.ui = Ui_DialogCall()
         self.ui.setupUi(self)
         self.setWindowTitle("StudyCall - Usuario")
+        self.last_id = id_usuario
 
         self.mostrar_chamados()
         self.mostrar_ultimo_id()
@@ -112,7 +114,7 @@ class ChamadoUser(QtWidgets.QDialog,Ui_DialogCall):
 
         self.ui.tableWidget.resizeColumnsToContents()
     def mostrar_ultimo_id(self):
-     ultimo_id = selecionar_ultimo_id()
+     ultimo_id = self.last_id
 
      if ultimo_id is not None:
         self.ui.tableUltimoID.setItem(0, 0, QtWidgets.QTableWidgetItem(str(ultimo_id)))
@@ -122,16 +124,17 @@ class ChamadoUser(QtWidgets.QDialog,Ui_DialogCall):
     
     def abrir_tela_criar(self):
         self.hide()
-        self.tela_criar = TelaChamadoCriar()
+        self.tela_criar = TelaChamadoCriar(self.last_id)
         self.tela_criar.exec_()
          
 
 
 class TelaChamadoCriar(QtWidgets.QDialog,Ui_create):
-      def __init__(self):
+      def __init__(self,id_user):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
+        self.id_user = id_user 
         self.btnChamado.clicked.connect(self.validar_acesso)
         self.btnVoltar.clicked.connect(self.retornar)
       def validar_acesso(self):
@@ -139,11 +142,11 @@ class TelaChamadoCriar(QtWidgets.QDialog,Ui_create):
               self.voltar()
       def voltar(self):
         self.hide()
-        self.tela_chamados = ChamadoUser()  
+        self.tela_chamados = ChamadoUser(self.id_user)  
         self.tela_chamados.show()
       def retornar(self):
         self.hide()
-        self.tela_chamados = ChamadoUser()  
+        self.tela_chamados = ChamadoUser(self.id_user)  
         self.tela_chamados.show()
      
 

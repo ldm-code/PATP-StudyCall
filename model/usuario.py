@@ -49,4 +49,24 @@ def selecionar_ultimo_id():
             cursor.close()
         if conexao:
            conexao.close()
+def selecionar_id_por_email_senha(email, senha):
+    try:
+        conexao = banco()
+        cursor = conexao.cursor()
+        sql = "SELECT id_usuario FROM usuario WHERE email = %s AND senha = %s LIMIT 1;"
+        valores = (email, senha)
+        cursor.execute(sql, valores)
+        resultado = cursor.fetchone()
+        if resultado:
+            return resultado[0] 
+        else:
+            return None
+    except mysql.connector.Error as erro:
+        print(f"Erro ao buscar usuário: {erro}")
+        return None
+    finally:
+        if cursor:
+            cursor.close()
+        if conexao:
+            conexao.close()
                    
