@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from model.chamado import selecionar_chamados
-from model.adm_usuario import selecionar_ultimo_id_adm
+from model.adm_usuario import selecionar_id_por_email_senha_adm
 from view.assumir_chamado import Ui_DialogAssumir as Ui_assumir
 
 class Ui_DialogSelect(object):
@@ -70,19 +70,19 @@ class Ui_DialogSelect(object):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
-
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.btnAssumir.setText(_translate("Dialog", "Assumir Chamado"))
 class TelaChamadoAdm(QtWidgets.QDialog,Ui_DialogSelect):
-    def __init__(self):
+    def __init__(self,id_adm):
         super().__init__()
         self.ui = Ui_DialogSelect()
         self.ui.setupUi(self)
         self.setWindowTitle("StudyCall - Administrador")
         self.ui.banco_adm.cellClicked.connect(self.selecionar_chamado)
         self.id_chamado_selecionado = None  
+        self.id_adm=id_adm
 
         self.carregar_chamados()
         self.mostrar_id_adm()
@@ -123,7 +123,7 @@ class TelaChamadoAdm(QtWidgets.QDialog,Ui_DialogSelect):
         tabela.resizeColumnsToContents()
     def mostrar_id_adm(self):
          
-     ultimo_id = selecionar_ultimo_id_adm()
+     ultimo_id = self.id_adm
 
      if ultimo_id is not None:
         self.ui.tableUltimoID.setItem(0, 0, QtWidgets.QTableWidgetItem(str(ultimo_id)))
@@ -134,14 +134,15 @@ class TelaChamadoAdm(QtWidgets.QDialog,Ui_DialogSelect):
            QtWidgets.QMessageBox.warning(self, "Atenção", "Selecione um chamado primeiro!")
            return False        
         self.hide()
-        self.tela_assumir=TelaAssumir()
+        self.tela_assumir=TelaAssumir(self.id_adm)
         self.tela_assumir.dar_valor_ao_id(self.id_chamado_selecionado) 
         self.tela_assumir.exec_()
 class TelaAssumir(QtWidgets.QDialog,Ui_assumir):
-    def __init__(self):
+    def __init__(self,id_admin):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
+        self.id_admin=id_admin
         self.btnAssumeChamado.clicked.connect(self.validar_acesso)
         self.btnVoltar.clicked.connect(self.retornar)
     def validar_acesso(self):
@@ -149,11 +150,11 @@ class TelaAssumir(QtWidgets.QDialog,Ui_assumir):
               self.voltar()
     def voltar(self):
         self.hide()
-        self.tela_chamados = TelaChamadoAdm()  
+        self.tela_chamados = TelaChamadoAdm(self.id_admin)  
         self.tela_chamados.show()
     def retornar(self):
         self.hide()
-        self.tela_chamados = TelaChamadoAdm()  
+        self.tela_chamados = TelaChamadoAdm(self.id_admin)  
         self.tela_chamados.show()
 
     

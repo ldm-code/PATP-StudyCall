@@ -173,6 +173,7 @@ class Ui_DialogAssumir(object):
         )
         self.btnVoltar.setObjectName("btnVoltar")
         self.btnVoltar.setText("Voltar")
+        self.id_admin=None
     def selecionar_prioridade(self, valor):
         self.prioridade_selecionada = valor
     def dar_valor_ao_id(self,valor):
@@ -193,7 +194,7 @@ class Ui_DialogAssumir(object):
         id_adm=self.lineIdAdm.text().strip()
         id_chamado=self.id_chamado
         data_fechamento=self.lineDataFecha.text().strip()
-        id_valer=selecionar_ultimo_id_adm()
+        id_valer=self.id_admin
         try:
                  id_adm_int = int(id_adm)
         except ValueError:
