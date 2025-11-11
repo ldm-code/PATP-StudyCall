@@ -63,7 +63,7 @@ class Ui_DialogInitAdm(object):
 "border-radius: 15px;\n"
 " border: 2px solid black;")
         self.btnCadastro.setObjectName("btnCadastro")
-
+        
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
