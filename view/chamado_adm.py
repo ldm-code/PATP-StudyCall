@@ -143,10 +143,15 @@ class TelaAssumir(QtWidgets.QDialog,Ui_assumir):
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
         self.btnAssumeChamado.clicked.connect(self.validar_acesso)
+        self.btnVoltar.clicked.connect(self.retornar)
     def validar_acesso(self):
           if self.assumir():
               self.voltar()
     def voltar(self):
+        self.hide()
+        self.tela_chamados = TelaChamadoAdm()  
+        self.tela_chamados.show()
+    def retornar(self):
         self.hide()
         self.tela_chamados = TelaChamadoAdm()  
         self.tela_chamados.show()

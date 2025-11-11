@@ -133,6 +133,7 @@ class TelaChamadoCriar(QtWidgets.QDialog,Ui_create):
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
         self.btnChamado.clicked.connect(self.validar_acesso)
+        self.btnVoltar.clicked.connect(self.retornar)
       def validar_acesso(self):
           if self.criar():
               self.voltar()
@@ -140,7 +141,11 @@ class TelaChamadoCriar(QtWidgets.QDialog,Ui_create):
         self.hide()
         self.tela_chamados = ChamadoUser()  
         self.tela_chamados.show()
-
+      def retornar(self):
+        self.hide()
+        self.tela_chamados = ChamadoUser()  
+        self.tela_chamados.show()
+     
 
 
 # if __name__ == "__main__":

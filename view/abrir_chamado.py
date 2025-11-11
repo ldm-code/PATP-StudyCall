@@ -119,7 +119,22 @@ class Ui_DialogCreate(object):
         self.lineChamado.setPlaceholderText('local onde ocorreu o problema descrito:')
         self.lineDesc.setPlaceholderText('descreva seu problema:')
         self.lineId.setPlaceholderText('seu id(um numero):')
-     
+        self.btnVoltar = QtWidgets.QPushButton(self.frame)
+        self.btnVoltar.setGeometry(QtCore.QRect(20, 50, 100, 30))
+        font = QtGui.QFont()
+        font.setFamily("Verdana")
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        self.btnVoltar.setFont(font)
+        self.btnVoltar.setStyleSheet(
+            "background-color: rgb(127, 255, 88);"
+            "border-radius: 10px;"
+            "border: 2px solid black;"
+        )
+        self.btnVoltar.setObjectName("btnVoltar")
+        self.btnVoltar.setText("Voltar")
+        self.btnVoltar.clicked.connect(Dialog.close)
         self.lineTitulo.setPlaceholderText('de um titulo para o problema:')
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
