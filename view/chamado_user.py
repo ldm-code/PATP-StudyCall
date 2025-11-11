@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from model.chamado import selecionar_chamados
-from model.usuario import selecionar_ultimo_id
+from model.usuario import selecionar_id_por_email_senha
 from view.abrir_chamado import Ui_DialogCreate as Ui_create
 
 class Ui_DialogCall(object):

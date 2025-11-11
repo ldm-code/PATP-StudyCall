@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from model.usuario import Usuario,selecionar_ultimo_id
+from model.usuario import Usuario,selecionar_id_por_email_senha
 
 
 class Ui_Dialog(object):
@@ -135,8 +135,8 @@ class Ui_Dialog(object):
           email_user=usuario.email
           msg=f"""
           Usuario salvo com sucesso!
-          senha: {nome_user}
           email: {email_user}
+          senha: {nome_user}
           * email e senha necessario para criar cadastro
           """
           QtWidgets.QMessageBox.information(None,"bem vindo",msg)

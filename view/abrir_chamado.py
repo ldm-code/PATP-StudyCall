@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from model.chamado import Chamado
-from model.usuario import selecionar_ultimo_id
+from model.usuario import selecionar_id_por_email_senha
 import re
 from datetime import datetime
 

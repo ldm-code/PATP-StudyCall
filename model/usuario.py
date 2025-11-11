@@ -25,31 +25,7 @@ class Usuario:
                 cursor.close()              
             if conexao:          
                 conexao.close()
-
-
-def selecionar_ultimo_id():
-    try:
-        conexao = banco()
-      
-
-        cursor = conexao.cursor()
-        cursor.execute("SELECT id_usuario FROM usuario ORDER BY id_usuario DESC LIMIT 1;")
-        resultado = cursor.fetchone()
-
-        if resultado:
-            return resultado[0]
-        else:
-            return None
-
-    except mysql.connector.Error as erro:
-        print(f"Erro ao buscar último ID: {erro}")
-        return None
-    finally:
-        if cursor:
-            cursor.close()
-        if conexao:
-           conexao.close()
-def selecionar_id_por_email_senha(email, senha):
+def selecionar_id_por_email_senha(email,senha):
     try:
         conexao = banco()
         cursor = conexao.cursor()
