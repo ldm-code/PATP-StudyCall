@@ -51,7 +51,6 @@ class TelaUsuario(QtWidgets.QDialog, Ui_User):
         self.hide()
         self.tela_chamado = ChamadoUserView() 
         self.tela_chamado.exec_()
-
 class TelaAdm(QtWidgets.QDialog,Ui_Adm):
      def __init__(self):
         super().__init__()
