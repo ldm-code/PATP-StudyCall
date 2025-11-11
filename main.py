@@ -17,6 +17,7 @@ from view.abrir_chamado import Ui_DialogCreate as Ui_create
 from view.chamado_adm import TelaChamadoAdm as ChamadoAdmView
 from view.inicio_log import Ui_DialogInit as Ui_InitLogUser
 from view.tela_login import Ui_DialogUserLog as Ui_userLog
+from view.inicio_log_adm import Ui_DialogInitAdm as Ui_AdmLog
 
 class TelaInicio(QtWidgets.QDialog, Ui_DialogInit):
     def __init__(self):
@@ -35,6 +36,16 @@ class TelaInicio(QtWidgets.QDialog, Ui_DialogInit):
         self.tela_facul=TelaFacul()
         self.tela_facul.exec_()
     def abrir_tela_adm(self):
+        self.hide()
+        self.tela_adm=LogUmAdm()
+        self.tela_adm.exec_()
+class LogUmAdm(QtWidgets.QDialog,Ui_AdmLog):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.setWindowTitle("StudyCall")
+        self.btnCadastro.clicked.connect(self.abrir_tela_user)  
+    def abrir_tela_user(self):
         self.hide()
         self.tela_adm=TelaAdm()
         self.tela_adm.exec_()
