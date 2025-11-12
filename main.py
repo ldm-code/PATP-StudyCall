@@ -93,11 +93,15 @@ class telaLog(QtWidgets.QDialog,Ui_userLog):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
-       
+        self.btnVoltar.clicked.connect(self.voltar_login)
         self.btnLogin.clicked.connect(self.validar_acesso) 
     def validar_acesso(self):
         if self.logar():
             self.abrir_tela_chamado()
+    def voltar_login(self):
+        self.hide()
+        self.tela_login=LogUmUser()
+        self.tela_login.exec_()
     def abrir_tela_chamado(self):
     
         self.hide()

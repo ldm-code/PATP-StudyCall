@@ -149,17 +149,17 @@ class Ui_DialogAdm(object):
         admin=Adm(nome=nome,senha=senha,instituicao=instituicao,email=email,matricula=matricula)
         if admin.pegar_id_instituicao() :
           try:
-                    id_adm=admin.salvar()
-                    nome_adm = admin.nome
+                    admin.salvar()
                     email_adm = admin.email
+                    nome_adm = admin.senha
 
 
                     mensagem = f"""
                     Admin salvo com sucesso!
-                    seu ID: {id_adm}
-                    Nome: {nome_adm}
+                   
                     Email: {email_adm}
-                    *id e necessario para assumir o chamado
+                    Senha: {nome_adm}
+                    *Isso é necessario para logar no sistema
                     """
 
                     QtWidgets.QMessageBox.information(None, "Confirmação", mensagem)

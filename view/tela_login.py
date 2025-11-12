@@ -68,7 +68,15 @@ class Ui_DialogUserLog(object):
         self.lineSenha = QtWidgets.QLineEdit(self.frame)
         self.lineSenha.setGeometry(QtCore.QRect(270, 290, 291, 21))
         self.lineSenha.setObjectName("lineSenha")
-
+        self.btnVoltar = QtWidgets.QPushButton(self.frame)
+        self.btnVoltar.setGeometry(QtCore.QRect(30, 80, 91, 41))
+        self.btnVoltar.setFont(font)
+        self.btnVoltar.setStyleSheet(
+            "background-color: rgb(35, 173, 4);\n"
+            "border-radius: 15px;\n"
+            "border: 2px solid black;"
+        )
+        self.btnVoltar.setObjectName("btnVoltar")
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         self.id_user=None
@@ -78,6 +86,7 @@ class Ui_DialogUserLog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.btnLogin.setText(_translate("Dialog", "Realizar Login"))
+        self.btnVoltar.setText(_translate("Dialog", "Voltar"))
         self.labNome.setText(_translate("Dialog", "Email:"))
         self.labNome_2.setText(_translate("Dialog", "Senha:"))
 
