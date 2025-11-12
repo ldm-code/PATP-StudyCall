@@ -83,7 +83,8 @@ class Ui_DialogAdmLog(object):
         self.btnVoltarAdm.setObjectName("btnVoltarAdm")
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
-
+        self.lineEmailAdm.setPlaceholderText('seu email cadastrado:')
+        self.lineSenhaAdm.setPlaceholderText('sua senha cadastrada:')
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
