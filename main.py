@@ -45,7 +45,8 @@ class telaLoginAdm(QtWidgets.QDialog,Ui_LoginAdmin):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("StudyCall")
-        self.btnLogin.clicked.connect(self.validar_acesso) 
+        self.btnLogin.clicked.connect(self.validar_acesso)
+        self.btnVoltarAdm.clicked.connect(self.voltar) 
     def validar_acesso(self):
         if self.login_adm():
             self.abrir_tela_chamado_adm()
@@ -53,6 +54,10 @@ class telaLoginAdm(QtWidgets.QDialog,Ui_LoginAdmin):
         self.hide()
         self.tela_chamado = ChamadoAdmView(self.id_adm) 
         self.tela_chamado.exec_()
+    def voltar(self):
+        self.hide()
+        self.tela_return=LogUmAdm()
+        self.tela_return.show()
 class LogUmAdm(QtWidgets.QDialog,Ui_AdmLog):
     def __init__(self):
         super().__init__()
