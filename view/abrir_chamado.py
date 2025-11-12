@@ -74,18 +74,8 @@ class Ui_DialogCreate(object):
         self.lineChamado = QtWidgets.QLineEdit(self.frame)
         self.lineChamado.setGeometry(QtCore.QRect(160, 330, 521, 22))
         self.lineChamado.setObjectName("lineChamado")
-        self.lineId = QtWidgets.QLineEdit(self.frame)
-        self.lineId.setGeometry(QtCore.QRect(160,390, 521, 22))
-        self.lineId.setObjectName("lineId")
-        self.labelD_3 = QtWidgets.QLabel(self.frame)
-        self.labelD_3.setGeometry(QtCore.QRect(360, 360, 121, 20))
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI Black")
-        font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.labelD_3.setFont(font)
-        self.labelD_3.setObjectName("labelD_3")
+      
+    
         self.btnChamado = QtWidgets.QPushButton(self.frame)
         self.btnChamado.setGeometry(QtCore.QRect(330, 440, 161, 41))
         font = QtGui.QFont()
@@ -118,7 +108,7 @@ class Ui_DialogCreate(object):
         
         self.lineChamado.setPlaceholderText('local onde ocorreu o problema descrito:')
         self.lineDesc.setPlaceholderText('descreva seu problema:')
-        self.lineId.setPlaceholderText('seu id(um numero):')
+   
         self.btnVoltar = QtWidgets.QPushButton(self.frame)
         self.btnVoltar.setGeometry(QtCore.QRect(20, 50, 100, 30))
         font = QtGui.QFont()
@@ -143,7 +133,7 @@ class Ui_DialogCreate(object):
         self.label.setText(_translate("Dialog", "Abra um Chamado:"))
         self.labelD.setText(_translate("Dialog", "Descrição:"))
         self.labelD_2.setText(_translate("Dialog", "Local do chamado:"))
-        self.labelD_3.setText(_translate("Dialog", "insira seu Id:"))
+     
         self.btnChamado.setText(_translate("Dialog", "Criar chamado"))
        
         self.labelD_4.setText(_translate("Dialog", "Insira um Título ao Chamado:"))
@@ -151,18 +141,10 @@ class Ui_DialogCreate(object):
       
          descricao = self.lineDesc.text().strip()
          local = self.lineChamado.text().strip()
-         id_user = self.lineId.text().strip()
+         id_user = self.id_user
          data_abertura = datetime.now().strftime("%d/%m/%Y")
          titulo=self.lineTitulo.text().strip()
-         id_valer=self.id_user
-         try:
-                 id_user_int = int(id_user)
-         except ValueError:
-                 QtWidgets.QMessageBox.warning(None, "Ops", "ID deve ser um número válido")
-                 return False
-         if id_user_int != id_valer:
-             QtWidgets.QMessageBox.warning(None, "Ops", "esse não e o seu id")
-             return False
+         
 
          if not re.fullmatch(r'^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$', data_abertura):
              QtWidgets.QMessageBox.warning(None, "Ops", "A data deve estar no seguinte formato; dd/mm/aaaa")
@@ -171,9 +153,7 @@ class Ui_DialogCreate(object):
          if not descricao or not local or not data_abertura or not id_user or not titulo:
               QtWidgets.QMessageBox.warning(None,'opa','um dos campos nao foi preenchido')
               return False
-         if not re.fullmatch(r'\d+', id_user):
-             QtWidgets.QMessageBox.warning(None,'ops','id de user invalido')
-             return False
+        
          call=Chamado(descricao=descricao,titulo=titulo,prioridade='media',local=local,id_user=id_user,data_abertura=data_abertura,data_fechamento='',id_adm=None,status='em aberto')
          if call.pegar_id_user():
              msg="""

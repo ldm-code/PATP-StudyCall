@@ -72,9 +72,7 @@ class Ui_DialogAssumir(object):
         font.setWeight(75)
         self.labelD.setFont(font)
         self.labelD.setObjectName("labelD")
-        self.lineIdAdm = QtWidgets.QLineEdit(self.frame)
-        self.lineIdAdm.setGeometry(QtCore.QRect(160, 370, 521, 22))
-        self.lineIdAdm.setObjectName("lineIdAdm")
+   
    
       
         self.btnAssumeChamado = QtWidgets.QPushButton(self.frame)
@@ -111,15 +109,7 @@ class Ui_DialogAssumir(object):
         font.setWeight(75)
         self.labelD_4.setFont(font)
         self.labelD_4.setObjectName("labelD_4")
-        self.labelD_6 = QtWidgets.QLabel(self.frame)
-        self.labelD_6.setGeometry(QtCore.QRect(360, 340, 121, 20))
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI Black")
-        font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.labelD_6.setFont(font)
-        self.labelD_6.setObjectName("labelD_6")
+    
     
       
 
@@ -157,7 +147,7 @@ class Ui_DialogAssumir(object):
 
         self.lineDataFecha.setPlaceholderText('data estimada/real de conclusao')
         self.id_chamado=None
-        self.lineIdAdm.setPlaceholderText('seu id de admin(um numero)')
+        
         self.btnVoltar = QtWidgets.QPushButton(self.frame)
         self.btnVoltar.setGeometry(QtCore.QRect(20, 50, 100, 30))
         font = QtGui.QFont()
@@ -187,22 +177,15 @@ class Ui_DialogAssumir(object):
         self.btnAssumeChamado.setText(_translate("Dialog", "Assumir chamado"))
         self.labelD_5.setText(_translate("Dialog", "Data de Fechamento do chamado:"))
         self.labelD_4.setText(_translate("Dialog", "Prioridade do Chamado:"))
-        self.labelD_6.setText(_translate("Dialog", "Insira seu Id:"))
+       
 
     def assumir(self):
         prioridade = self.prioridade_selecionada
-        id_adm=self.lineIdAdm.text().strip()
+        id_adm=self.id_admin
         id_chamado=self.id_chamado
         data_fechamento=self.lineDataFecha.text().strip()
-        id_valer=self.id_admin
-        try:
-                 id_adm_int = int(id_adm)
-        except ValueError:
-                 QtWidgets.QMessageBox.warning(None, "Ops", "ID deve ser um número válido")
-                 return False
-        if id_adm_int != id_valer:
-             QtWidgets.QMessageBox.warning(None, "Ops", "esse não e o seu id")
-             return False
+      
+        
         if self.rbAberto.isChecked():
               status = 'em aberto'
         elif self.rbAndamento.isChecked():
@@ -225,9 +208,7 @@ class Ui_DialogAssumir(object):
         if not re.fullmatch(r'^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$', data_fechamento):
              QtWidgets.QMessageBox.warning(None, "Ops", "A data deve estar no seguinte formato; dd/mm/aaaa")
              return False
-        if not re.fullmatch(r'\d+',id_adm):
-             QtWidgets.QMessageBox.warning(None,'ops','id invalido')
-             return False
+     
         elif not data_fechamento or not id_adm or not id_chamado:
             QtWidgets.QMessageBox.warning(None,'ops','um dos campos nao foi preenchido')
             return False
