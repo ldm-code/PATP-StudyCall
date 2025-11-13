@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from model.chamado import selecionar_chamados
+from model.chamado import selecionar_chamados,selecionar_chamados_abertos,selecionar_chamados_andamento,selecionar_chamados_resolvidos
 from model.adm_usuario import selecionar_id_por_email_senha_adm
 from view.assumir_chamado import Ui_DialogAssumir as Ui_assumir
 
@@ -67,6 +67,23 @@ class Ui_DialogSelect(object):
         self.tableUltimoID.horizontalHeader().setStretchLastSection(True)
         self.tableUltimoID.verticalHeader().setVisible(False)
         self.tableUltimoID.horizontalHeader().setFixedHeight(25)
+       
+        self.radioTodos = QtWidgets.QRadioButton(self.frame)
+        self.radioTodos.setGeometry(QtCore.QRect(30, 100, 100, 20))
+        self.radioTodos.setText("Todos")
+        self.radioTodos.setChecked(True)  
+
+        self.radioAberto = QtWidgets.QRadioButton(self.frame)
+        self.radioAberto.setGeometry(QtCore.QRect(30, 120, 100, 20))
+        self.radioAberto.setText("Em aberto")
+
+        self.radioAndamento = QtWidgets.QRadioButton(self.frame)
+        self.radioAndamento.setGeometry(QtCore.QRect(30, 140, 120, 20))
+        self.radioAndamento.setText("Em andamento")
+
+        self.radioConcluido = QtWidgets.QRadioButton(self.frame)
+        self.radioConcluido.setGeometry(QtCore.QRect(30, 160, 100, 20))
+        self.radioConcluido.setText("Concluído")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -81,6 +98,10 @@ class TelaChamadoAdm(QtWidgets.QDialog,Ui_DialogSelect):
         self.ui.setupUi(self)
         self.setWindowTitle("StudyCall - Administrador")
         self.ui.banco_adm.cellClicked.connect(self.selecionar_chamado)
+        self.ui.radioTodos.toggled.connect(self.carregar_chamados)
+        self.ui.radioAberto.toggled.connect(self.carregar_chamados)
+        self.ui.radioAndamento.toggled.connect(self.carregar_chamados)
+        self.ui.radioConcluido.toggled.connect(self.carregar_chamados)
         self.id_chamado_selecionado = None  
         self.id_adm=id_adm
 
@@ -101,7 +122,14 @@ class TelaChamadoAdm(QtWidgets.QDialog,Ui_DialogSelect):
     def carregar_chamados(self):
      
         try:
-            colunas, resultados = selecionar_chamados()  
+            if self.ui.radioTodos.isChecked():
+               colunas, resultados = selecionar_chamados() 
+            if self.ui.radioAberto.isChecked():
+                colunas, resultados=selecionar_chamados_abertos() 
+            if self.ui.radioAndamento.isChecked():
+                colunas, resultados=selecionar_chamados_andamento() 
+            if self.ui.radioConcluido.isChecked():
+                colunas, resultados=selecionar_chamados_resolvidos()
         except Exception as e:
             QtWidgets.QMessageBox.critical(self, "Erro", f"Erro ao carregar chamados:\n{e}")
             return False

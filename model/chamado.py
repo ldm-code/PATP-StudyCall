@@ -165,3 +165,111 @@ def selecionar_chamados():
     except mysql.connector.Error as erro:
         print(f"Erro ao buscar chamados: {erro}")
         return [], [] 
+def selecionar_chamados_abertos():
+    try:
+       
+        conexao = banco()
+        cursor = conexao.cursor()
+
+        query = """
+            SELECT 
+                c.id_chamado,
+                adm.nome AS nome_adm,
+                c.titulo,
+                c.descricao,
+                c.prioridade,
+                c.status_chamado,
+                c.local,
+                a.nome AS nome_usuario,
+                c.data_abertura,
+                c.data_fechamento
+            FROM chamados c
+            INNER JOIN usuario a ON c.fk_usuario = a.id_usuario
+            LEFT JOIN adm ON c.id_adm = adm.id_adm
+            WHERE  c.status_chamado='em aberto';
+        """
+
+        cursor.execute(query)
+        resultados = cursor.fetchall()           
+        colunas = [desc[0] for desc in cursor.description]  
+
+        cursor.close()
+        conexao.close()
+
+        return colunas, resultados
+
+    except mysql.connector.Error as erro:
+        print(f"Erro ao buscar chamados: {erro}")
+        return [], [] 
+def selecionar_chamados_andamento():
+    try:
+       
+        conexao = banco()
+        cursor = conexao.cursor()
+
+        query = """
+            SELECT 
+                c.id_chamado,
+                adm.nome AS nome_adm,
+                c.titulo,
+                c.descricao,
+                c.prioridade,
+                c.status_chamado,
+                c.local,
+                a.nome AS nome_usuario,
+                c.data_abertura,
+                c.data_fechamento
+            FROM chamados c
+            INNER JOIN usuario a ON c.fk_usuario = a.id_usuario
+            LEFT JOIN adm ON c.id_adm = adm.id_adm
+            WHERE  c.status_chamado='em andamento';
+        """
+
+        cursor.execute(query)
+        resultados = cursor.fetchall()           
+        colunas = [desc[0] for desc in cursor.description]  
+
+        cursor.close()
+        conexao.close()
+
+        return colunas, resultados
+
+    except mysql.connector.Error as erro:
+        print(f"Erro ao buscar chamados: {erro}")
+        return [], [] 
+def selecionar_chamados_resolvidos():
+    try:
+       
+        conexao = banco()
+        cursor = conexao.cursor()
+
+        query = """
+            SELECT 
+                c.id_chamado,
+                adm.nome AS nome_adm,
+                c.titulo,
+                c.descricao,
+                c.prioridade,
+                c.status_chamado,
+                c.local,
+                a.nome AS nome_usuario,
+                c.data_abertura,
+                c.data_fechamento
+            FROM chamados c
+            INNER JOIN usuario a ON c.fk_usuario = a.id_usuario
+            LEFT JOIN adm ON c.id_adm = adm.id_adm
+            WHERE  c.status_chamado='resolvido';
+        """
+
+        cursor.execute(query)
+        resultados = cursor.fetchall()           
+        colunas = [desc[0] for desc in cursor.description]  
+
+        cursor.close()
+        conexao.close()
+
+        return colunas, resultados
+
+    except mysql.connector.Error as erro:
+        print(f"Erro ao buscar chamados: {erro}")
+        return [], [] 
