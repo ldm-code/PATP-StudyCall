@@ -96,14 +96,14 @@ class Ui_DialogAdmLog(object):
          email=self.lineEmailAdm.text().strip()
          senha=self.lineSenhaAdm.text().strip()
          if not email or not senha:
-            QtWidgets.QMessageBox.warning(None,'ops','campo nao preenchido')
+            QtWidgets.QMessageBox.warning(None,'ops','campo não preenchido.')
             return False
          self.id_adm=selecionar_id_por_email_senha_adm(email=email,senha=senha)
          if self.id_adm is not None:
             QtWidgets.QMessageBox.information(None,'eba','login realizado com sucesso !')
             return True
          else:
-            QtWidgets.QMessageBox.warning(None,'ops','acesso inexistente')
+            QtWidgets.QMessageBox.warning(None,'ops','acesso inexistente.')
             return False
 # if __name__ == "__main__":
 #     import sys

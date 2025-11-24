@@ -143,25 +143,19 @@ class Ui_DialogAdm(object):
             return False
         elif not re.fullmatch(r'\d+', instituicao):
              QtWidgets.QMessageBox.warning(None,'erro','aqui voce digita o id da instituicao cadastrada')
-             return False
-        
-       
+             return False       
         admin=Adm(nome=nome,senha=senha,instituicao=instituicao,email=email,matricula=matricula)
         if admin.pegar_id_instituicao() :
           try:
                     admin.salvar()
                     email_adm = admin.email
                     nome_adm = admin.senha
-
-
                     mensagem = f"""
-                    Admin salvo com sucesso!
-                   
+                    Admin salvo com sucesso!                 
                     Email: {email_adm}
                     Senha: {nome_adm}
                     *Isso é necessario para logar no sistema
                     """
-
                     QtWidgets.QMessageBox.information(None, "Confirmação", mensagem)
                     return True
           except:

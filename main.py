@@ -103,7 +103,6 @@ class telaLog(QtWidgets.QDialog,Ui_userLog):
         self.tela_login=LogUmUser()
         self.tela_login.exec_()
     def abrir_tela_chamado(self):
-    
         self.hide()
         self.tela_chamado = ChamadoUserView(self.id_user) 
         self.tela_chamado.exec_()
@@ -147,13 +146,6 @@ class TelaFacul(QtWidgets.QDialog,Ui_Facul):
          self.hide()
          self.tela_inicio=TelaInicio()
          self.tela_inicio.exec_()
-
-
-
-
-
-
-
 def main():
     app = QtWidgets.QApplication(sys.argv)
     janela =TelaInicio()

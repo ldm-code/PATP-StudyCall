@@ -95,10 +95,10 @@ class Ui_DialogUserLog(object):
         senha=self.lineSenha.text().strip()
         self.id_user=selecionar_id_por_email_senha(email=email,senha=senha)
         if not email or not senha:
-            QtWidgets.QMessageBox.warning(None,'ops','campo nao preenchido')
+            QtWidgets.QMessageBox.warning(None,'ops','campo não preenchido.')
             return False
         if self.id_user ==None:
-            QtWidgets.QMessageBox.warning(None,'ops','acesso inexistente')
+            QtWidgets.QMessageBox.warning(None,'ops','acesso inexistente.')
             return False
         else:
             QtWidgets.QMessageBox.information(None,'eba','login realizado com sucesso !')
