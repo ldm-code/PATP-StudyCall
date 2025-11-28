@@ -29,7 +29,7 @@
 
 ##  Tecnologias
 
-* Linguagem: `Python` (indique versão, por exemplo `3.13+`)
+* Linguagem: `Python` (`3.13+`)
 * Frameworks / libs: `PyQt5` / `MySQL connector`
 * Banco de dados:`MySQL`
 
@@ -82,10 +82,13 @@ PATP-StudyCall/
 │  ├─ ui/ * arquivos.ui das interfaces em pyqt5
 │  ├─ chamado_user.py
 │  ├─ chamado_adm.py
-│  ├─ chamado_assumido.py
-│  ├─ criar_chamado.py
-│  ├─ telaLog.py
+│  ├─ assumir_chamado.py
+│  ├─ abrir_chamado.py
+│  ├─ tela_login.py
+│  ├─ inicio_log.py
+│  ├─ inicio_log_adm.py
 │  ├─ telaInicio.py
+│  ├─ tela_login_adm.py
 │  ├─ user.py
 │  ├─ admin.py
 │  └─ facul.py
