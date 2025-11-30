@@ -44,6 +44,45 @@
 
 ---
 
+
+
+## Estrutura do projeto:
+
+
+- PATP-StudyCall/
+- ├─model/
+- │  ├─ crud_banco.py
+- │  ├─ chamado.py
+- │  ├─ usuario.py
+- │  ├─ adm_usuario.py
+- │  └─instituicao.py
+- ├─ view/
+- │  ├─ ui/ * arquivos.ui das interfaces em pyqt5
+- │  ├─ chamado_user.py
+- │  ├─ chamado_adm.py
+- │  ├─ assumir_chamado.py
+- │  ├─ abrir_chamado.py
+- │  ├─ tela_login.py
+- │  ├─ inicio_log.py
+- │  ├─ inicio_log_adm.py
+- │  ├─ telaInicio.py
+- │  ├─ tela_login_adm.py
+- │  ├─ user.py
+- │  ├─ admin.py
+- │  └─ facul.py
+- ├─ main.py
+- └─README.md
+
+
+
+
+
+
+
+
+
+---
+
 ##  Instalação (exemplo básico)
 
 ```bash
@@ -63,48 +102,6 @@ source .venv/bin/activate
 pip install PyQt5
 pip install  mysql-connector-python
 ```
-
-
-
----
-
-## Estrutura do projeto:
-
-
-PATP-StudyCall/
-├─model/
-│  ├─ crud_banco.py
-│  ├─ chamado.py
-│  ├─ usuario.py
-│  ├─ adm_usuario.py
-│  └─instituicao.py
-├─ view/
-│  ├─ ui/ * arquivos.ui das interfaces em pyqt5
-│  ├─ chamado_user.py
-│  ├─ chamado_adm.py
-│  ├─ assumir_chamado.py
-│  ├─ abrir_chamado.py
-│  ├─ tela_login.py
-│  ├─ inicio_log.py
-│  ├─ inicio_log_adm.py
-│  ├─ telaInicio.py
-│  ├─ tela_login_adm.py
-│  ├─ user.py
-│  ├─ admin.py
-│  └─ facul.py
-├─ main.py
-└─README.md
-```
-
-
-
-
-
-
-
-
----
-
 ## 📬 Contato
 
 * Autores: Leonardo De Moraes,Gabriel Antonio Tunello,Victor Antonio Biazin
@@ -112,6 +109,8 @@ PATP-StudyCall/
 * Email de Victor: victbiazin@gmail.com
 * Email de Gabriel: gabrieltunello06@gmail.com
 ---
+
+
 
 
 
