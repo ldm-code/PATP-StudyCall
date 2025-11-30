@@ -61,7 +61,7 @@ source .venv/bin/activate
 
 # instalar dependências
 pip install PyQt5
-pip install PyQt5
+pip install  mysql-connector-python
 ```
 
 
