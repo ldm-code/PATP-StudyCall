@@ -56,7 +56,7 @@
 - │  ├─ usuario.py
 - │  ├─ adm_usuario.py
 - │  └─instituicao.py
-- ├─dados/ * aqui esta o arquivo.sql que voce ira executar
+- ├─dados/ * aqui esta o arquivo.sql que voce ira executar antes de rodar a aplicacao
 - ├─ view/
 - │  ├─ ui/ * arquivos.ui das interfaces em pyqt5
 - │  ├─ chamado_user.py
