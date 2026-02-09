@@ -22,6 +22,7 @@
 * Interfaces desktop em pyqt5
 * Login funcional
 * Ldmin validado pelo id da instituicao cadastrada
+* Automacao de testes basica com PyAutoGui
 
 
 
@@ -30,7 +31,7 @@
 ##  Tecnologias
 
 * Linguagem: `Python` (`3.13+`)
-* Frameworks / libs: `PyQt5` / `MySQL connector`
+* Frameworks / libs: `PyQt5` / `MySQL connector` /`PyAutoGui´
 * Banco de dados:`MySQL`
 
 
@@ -39,8 +40,9 @@
 ##  Pré-requisitos
 
 * Python 3.13+ instalado
-* ter o pyqt5 e Mysql connector instalados
+* ter o pyqt5,PyautoGui e Mysql connector instalados
 * Banco de dados(execute o arquivo .sql no seu workbench)
+* Para executar o arquivo de testes,tenha um adm ja cadastrado no banco e coloque os dados de acesso na funcao onde a imagem passada e "email" ,mude pro email do seu adm cadastrado ,e onde a imagem passada e "senha" ,aletere pra senha do respectivo adm(a imagem sempre e o 1 parametro da funcao onde tem 2 parametros).
 
 ---
 
