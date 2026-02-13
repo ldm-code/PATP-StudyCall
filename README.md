@@ -1,7 +1,7 @@
 # PATP-StudyCall
 
- ** Sistema desenvolvido para o PATP do 2 semestre da faculade IDEAU em Pyqt5 ecom crud com Mysql Connector para que estudantes consigam registar chamados de itens danificados na faculdade.
-
+ ** Sistema desenvolvido para o PATP do 2 semestre da faculade IDEAU em Pyqt5 e com crud com Mysql Connector para que estudantes consigam registar chamados de itens danificados na faculdade.
+* melhoria recente:automacao basica com PyAutoGui
 ---
 
 ##  Visão geral
@@ -98,12 +98,15 @@ python -m venv .venv
 source .venv/bin/activate
 
 # Windows (PowerShell)
-# py -m venv .venv
+# python -m venv .venv
 # .\.venv\Scripts\Activate.ps1
 
 # instalar dependências
 pip install PyQt5
 pip install  mysql-connector-python
+pip install PyAutoGui
+pip install Pillow
+pip install opencv-python
 ```
 ## 📬 Contato
 
