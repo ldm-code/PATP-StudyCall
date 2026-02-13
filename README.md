@@ -1,7 +1,7 @@
 # PATP-StudyCall
 
- ** Sistema desenvolvido para o PATP do 2 semestre da faculade IDEAU em Pyqt5 e com crud com Mysql Connector para que estudantes consigam registar chamados de itens danificados na faculdade.
-* melhoria recente:automacao basica com PyAutoGui
+- Sistema desenvolvido para o PATP do 2 semestre da faculade IDEAU em Pyqt5 e com crud com Mysql Connector para que estudantes consigam registar chamados de itens danificados na faculdade.
+* melhoria recente: Automacao basica com PyAutoGui
 ---
 
 ##  Visão geral
